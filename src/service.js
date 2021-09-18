@@ -18,7 +18,10 @@ const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage();
 
-export async function searchJournalist(query) {
+export async function searchJournalists(query) {
+  if(!query) {
+    return [];
+  }
   const tokens = query.trim().split(' ');
   const col = query(collection(db, 'journalists'), where('tags', 'array-contains-any', tokens));
   const snap = await getDocs(col);
@@ -31,7 +34,6 @@ export async function addJournalist(firstName, lastName, photoFile) {
   const path = 'images/' + photoFile.name;
   const imageRef = ref(storage, path);
   await uploadBytes(imageRef, photoFile);
-
   console.log('file-uploaded');
 
   const docRef = await addDoc(collection(db, 'journalists'), {
