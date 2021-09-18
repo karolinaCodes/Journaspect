@@ -18,7 +18,7 @@ function SignUp(){
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    signUp(data.get('email'), data.get('password') , data.get('confirm_password'));
+    signUpUserWithEmailAndPassword(data.get('email'), data.get('password'));
   };
 
   return (
@@ -108,15 +108,9 @@ function SignUp(){
   );
 }
 
-function signUp(email, password, confirm_password) {
-  // TODO hook this up to form
-   this.state = {
-    input: '',
-    errors: ''
-  }; 
- /*    const [input, errors] = useState([
-    ]); 
-    */
+function signUpUserWithEmailAndPassword(email, password, confirm_password) {
+
+
   try {
     signUpUser(email, password, confirm_password);
   } catch(e) {
@@ -125,6 +119,19 @@ function signUp(email, password, confirm_password) {
       console.warn('email already in use');
     }
   }
+
+
+
+
+  // TODO hook this up to form
+   this.state = {
+    input: '',
+    errors: ''
+  }; 
+ /*    const [input, errors] = useState([
+    ]); 
+    */
+
   
   let input = this.state.input;
   let errors = {};
