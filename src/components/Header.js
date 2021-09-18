@@ -16,13 +16,29 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
+import SignUpButton from "./SignUpButton";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
+  header: {
+    background: "rgb(248,248,255)",
+  },
+  headerColor: { color: "rgb(63, 61, 86)" },
+  typography: {
+    marginLeft: "10px !important",
+    fontFamily: "Poppins",
+    color: "rgb(63, 61, 86)",
+    fontWeight: 600,
+  },
+});
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: "rgb(24 95 240 / 10%)",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: "rgb(24 95 240 / 10%)",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -31,6 +47,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
+  color: "rgb(63, 61, 86) !important",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -41,6 +58,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "rgb(63, 61, 86) !important",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -155,35 +173,38 @@ export default function Header() {
     </Menu>
   );
 
+  const classes = useStyles();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" class={classes.header}>
         <Toolbar>
+          <svg
+            width="25px"
+            xmlns="http://www.w3.org/2000/svg"
+            className={("h-6 w-6", classes.headerColor)}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+            />
+          </svg>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
+            class={classes.typography}
           >
-            <svg
-              width="25px"
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-              />
-            </svg>
             Journaspect
           </Typography>
-          <Search>
-            <SearchIconWrapper>
+          <Search class={(classes.headerColor, classes.searchBar)}>
+            <SearchIconWrapper class={classes.headerColor}>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
@@ -191,11 +212,11 @@ export default function Header() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}></Box>
           <SignInButton />
+          <SignUpButton />
         </Toolbar>
       </AppBar>
     </Box>
