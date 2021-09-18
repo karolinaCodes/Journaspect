@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+* {
+  margin: 0;
+}
+
+body {
+  color: #66f;
+  background-color: #ffffff;
+}
+
+a {
+  color: #66f;
+}
+a:visted {
+  color: #99f;
+}
+input {
+  color: inherit;
+  background-color: inherit;
+}
+#site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#site-logo {
+  margin: 0 1rem;
+}
