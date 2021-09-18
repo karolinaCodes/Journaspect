@@ -18,7 +18,7 @@ function SignUp(){
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    signUp(data.get('email'), data.get('password'));
+    signUp(data.get('email'), data.get('password') , data.get('confirm_password'));
   };
 
   return (
@@ -44,11 +44,11 @@ function SignUp(){
               <Grid item xs={12}>
                 <TextField
                   autoComplete="fname"
-                  name="Display Name"
+                  name="Display_Name"
                   required
                   fullWidth
-                  id="Display Name"
-                  label="Display Name"
+                  id="Display_Name"
+                  label="Display_Name"
                   autoFocus
                 />
               </Grid>
@@ -58,6 +58,7 @@ function SignUp(){
                   fullWidth
                   id="email"
                   label="Email Address"
+                  type="email"
                   name="email"
                   autoComplete="email"
                 />
@@ -109,6 +110,13 @@ function SignUp(){
 
 function signUp(email, password, confirm_password) {
   // TODO hook this up to form
+   this.state = {
+    input: '',
+    errors: ''
+  }; 
+ /*    const [input, errors] = useState([
+    ]); 
+    */
   try {
     signUpUser(email, password, confirm_password);
   } catch(e) {
@@ -117,6 +125,65 @@ function signUp(email, password, confirm_password) {
       console.warn('email already in use');
     }
   }
+  
+  let input = this.state.input;
+  let errors = {};
+  let isValid = true;
+
+  if (!input["Display_Name"]) {
+    isValid = false;
+    errors["Display_Name"] = "Please enter your name.";
+  }
+
+  if (!input["email"]) {
+    isValid = false;
+    errors["email"] = "Please enter your email Address.";
+  }
+
+  if(!input["password"]){
+    isValid = false;
+    errors["password"] = "Please enter your password";
+  }
+
+  if(!input["confirm_password"]){
+    isValid = false;
+    errors["confirm_password"] = "Please enter your password";
+  } 
+
+  if(input[password] !== input[confirm_password]){
+    isValid = false;
+    errors["confirm_password"] = "Passwords do not match";
+  }
+
+
+  if (typeof input["email"] !== "undefined") {
+      
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    if (!pattern.test(input["email"])) {
+      isValid = false;
+      errors["email"] = "Please enter valid email address.";
+    }
+  }
+
+  if(this.validate()){
+    console.log(this.state);
+
+    let input = {};
+    input["Display_Name"] = "";
+    input["email"] = "";
+    input["password"] = "";
+    this.setState({input:input});
+
+    alert('Demo Form is submited');
 }
+
+
+  this.setState({
+    errors: errors
+  });
+
+  return isValid;
+}
+
 
 export default SignUp;

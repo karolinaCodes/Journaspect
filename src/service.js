@@ -23,10 +23,13 @@ export async function getJournalist() {
   return list;
 }
 
-export async function signUpUser(email, password, confirm_password, name, pictureURL) {
+/*  export async function addJournalist(){
+
+}  */
+
+export async function signUpUser(Display_Name,email, password, confirm_password, pictureURL) {
   const user = await createUserWithEmailAndPassword(auth, email, password, confirm_password);
   await updateProfile(user, {
-    displayName: name,
     photoURL: pictureURL
   });
   return user;
