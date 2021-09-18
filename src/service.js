@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9a01S71En19HM5yi1G3sftbuxvarjDrY",
@@ -15,19 +16,29 @@ console.log('initilizing firebase');
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
+const storage = getStorage();
 
-export async function searchJournalist() {
-  const col = collection(db, 'journalist');
+export async function searchJournalist(query) {
+  const tokens = query.trim().split(' ');
+  const col = query(collection(db, 'journalists'), where('tags', 'array-contains-any', tokens));
   const snap = await getDocs(col);
   const list = snap.docs.map(doc => doc.data());
   return list;
 }
 
-export async function addJournalist(firstName, lastName, photoURL) {
+export async function addJournalist(firstName, lastName, photoFile) {
+  console.log(photoFile);
+  const path = 'images/' + photoFile.name;
+  const imageRef = ref(storage, path);
+  await uploadBytes(imageRef, photoFile);
+
+  console.log('file-uploaded');
+
   const docRef = await addDoc(collection(db, 'journalists'), {
     firstName: firstName,
     lastName: lastName,
-    photoURL: photoURL
+    photoURL: 'images/' + photoFile.name,
+    tags: [firstName, lastName]
   });
   return docRef.id;
 }
@@ -39,6 +50,7 @@ export async function getJournalist(id) {
 }
 
 export async function signUpUser(email, password, name, photoURL) {
+  console.log(name);
   const q = query(collection(db, 'user'), where('displayName', '==', name));
   const snap = await getDocs(q);
   if(snap.size) {
@@ -85,7 +97,7 @@ export const userManager = {
   user: null,
   subscribers: [],
 
-  async setUser(user) {
+  async setUser(user) { 
     if(!user) {
       this.user = null;
       return;
