@@ -1,44 +1,51 @@
-import './App.css';
-import {Route} from 'react-router-dom';
-import {Fragment} from 'react';
-import HomePage from './pages/HomePage';
-import MyProfile from './pages/MyProfile';
-import JournalistPage from './pages/JournalistPage';
-import AddJournalist from './pages/AddJournalist';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
-import SearchResults from './pages/SearchResults';
+import "./App.css";
+import { Route } from "react-router-dom";
+import { Fragment } from "react";
+import HomePage from "./pages/HomePage";
+import MyProfile from "./pages/MyProfile";
+import JournalistPage from "./pages/JournalistPage";
+import AddJournalist from "./pages/AddJournalist";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import SearchResults from "./pages/SearchResults";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PageNotFoundImg from "./assets/undraw_page_not_found_su7k.jpg";
+import { Switch } from "react-router-dom";
 
 function App() {
   return (
     <Fragment>
       <Header />
-    <Route path="/" exact>
-      <HomePage/>
-    </Route>
-    <Route path="/myprofile" exact >
-      <MyProfile/>
-    </Route>
-    <Route path="/journalistpage" >
-    { /*need to make dynamic*/ }
-      <JournalistPage/>
-    </Route>
-    <Route path="/addjournalist" >
-      <AddJournalist/>
-    </Route>
-    <Route path="/signup" exact>
-      <SignUp/>
-    </Route>
-    <Route path="/signin" exact>
-      <SignIn/>
-    </Route>
-    <Route path="/searchresultspage" exact>
-      { /*need to make dynamic*/ }
-      <SearchResults/>
-    </Route>
-    <Footer />
+      <Switch>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/myprofile" exact>
+          <MyProfile />
+        </Route>
+        <Route path="/journalistpage">
+          {/*need to make dynamic*/}
+          <JournalistPage />
+        </Route>
+        <Route path="/addjournalist">
+          <AddJournalist />
+        </Route>
+        <Route path="/signup" exact>
+          <SignUp />
+        </Route>
+        <Route path="/signin" exact>
+          <SignIn />
+        </Route>
+        <Route path="/searchresultspage" exact>
+          {/*need to make dynamic*/}
+          <SearchResults />
+        </Route>
+        <Route path="*">
+          <img src={PageNotFoundImg} width="100%" margin="0" height="100%" />
+        </Route>
+      </Switch>
+      <Footer />
     </Fragment>
   );
 }
