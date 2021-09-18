@@ -18,11 +18,11 @@ const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage();
 
-export async function searchJournalists(query) {
-  if(!query) {
+export async function searchJournalists(queryString) {
+  if(!queryString) {
     return [];
   }
-  const tokens = query.trim().split(' ');
+  const tokens = queryString.trim().split(' ');
   const col = query(collection(db, 'journalists'), where('tags', 'array-contains-any', tokens));
   const snap = await getDocs(col);
   const list = snap.docs.map(doc => doc.data());
@@ -40,7 +40,7 @@ export async function addJournalist(firstName, lastName, photoFile) {
     firstName: firstName,
     lastName: lastName,
     photoURL: 'images/' + photoFile.name,
-    tags: [firstName, lastName]
+    tags: [firstName.toLowerCase(), lastName.toLowerCase()]
   });
   return docRef.id;
 }
