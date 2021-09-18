@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9a01S71En19HM5yi1G3sftbuxvarjDrY",
@@ -24,6 +24,13 @@ export async function getJournalist() {
   return list;
 }
 
-export async function signUpUser(email, password) {
-    return await createUserWithEmailAndPassword(auth, email, password);
+export async function signUpUser(email, password, firstName, lastName) {
+  
+  return await createUserWithEmailAndPassword(auth, email, password);
 }
+
+export async function signInUser(email, password) {
+  return await signInWithEmailAndPassword(auth, email, password)
+}
+
+
