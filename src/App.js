@@ -37,7 +37,7 @@ function App() {
         <Route path="/signin" exact>
           <SignIn />
         </Route>
-        <Route path="/searchresultspage" exact>
+        <Route path="/searchresults" exact>
           {/*need to make dynamic*/}
           <SearchResults />
         </Route>
