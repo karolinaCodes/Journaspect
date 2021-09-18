@@ -14,11 +14,16 @@ import { signUpUser } from '../service.js';
 
 const theme = createTheme();
 
+
 function SignUp(){
+  const [passwordError, SetPasswordError] = React.useState('');
   const handleSubmit = (event) => {
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(data.get("email"));
     signUpUserWithEmailAndPassword(data.get('email'), data.get('password'));
+    
   };
 
   return (
@@ -64,7 +69,8 @@ function SignUp(){
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                {passwordError === '' ?
+                (<TextField
                   required
                   fullWidth
                   name="password"
@@ -73,6 +79,18 @@ function SignUp(){
                   id="password"
                   autoComplete="new-password"
                 />
+                ) : (
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    error
+                    helperText={passwordError}
+                  />   )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -108,31 +126,30 @@ function SignUp(){
   );
 }
 
-function signUpUserWithEmailAndPassword(email, password, confirm_password) {
+function signUpUserWithEmailAndPassword(email, password, name) {
 
 
   try {
-    signUpUser(email, password, confirm_password);
+    signUpUser(email, password, name);
   } catch(e) {
     if(e.code === 'auth/email-already-in-use') {
       // TODO display error to user, perhaps modal?
       console.warn('email already in use');
     }
   }
+}
 
-
-
-
+    
+/* 
   // TODO hook this up to form
    this.state = {
     input: '',
     errors: ''
-  }; 
+  };  */
  /*    const [input, errors] = useState([
     ]); 
     */
-
-  
+/* 
   let input = this.state.input;
   let errors = {};
   let isValid = true;
@@ -171,7 +188,7 @@ function signUpUserWithEmailAndPassword(email, password, confirm_password) {
       errors["email"] = "Please enter valid email address.";
     }
   }
-
+ *//* 
   if(this.validate()){
     console.log(this.state);
 
@@ -183,14 +200,7 @@ function signUpUserWithEmailAndPassword(email, password, confirm_password) {
 
     alert('Demo Form is submited');
 }
-
-
-  this.setState({
-    errors: errors
-  });
-
-  return isValid;
-}
+ */
 
 
 export default SignUp;
