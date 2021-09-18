@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import "./Card.module.css";
 
 const useStyles = makeStyles({
   typography: { textAlign: "center", fontFamily: "Poppins" },

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9a01S71En19HM5yi1G3sftbuxvarjDrY",
@@ -34,7 +34,7 @@ export async function addJournalist(firstName, lastName, photoURL) {
 
 export async function getJournalist(id) {
   const docSnap = await getDoc(doc(db, 'journalists', id));
-  
+
   return docSnap.data();
 }
 
@@ -62,21 +62,51 @@ export async function signUpUser(email, password, name, photoURL) {
   await updateProfile(user, {
     photoURL: photoURL
   });
-  console.log(user);
-  return {
-    name: name, 
-    photoURL: photoURL,
-    email: email
-  };
+  return userManager.getCurrentUser();
 }
 
 export async function signInUser(email, password) {
   let user;
   user = (await signInWithEmailAndPassword(auth, email, password)).user;
   const docSnap = await getDoc(doc(db, 'users', user.uid));
-  if(!docSnap.exists) {
+  if(!docSnap.exists()) {
     throw {code: 'auth/user-not-found-in-db'};
   }
-  doc = doc.data();
-  return {name: doc.displayName, email: user.email, pictureURL: user.photoURL};
+  //doc = docSnap.data();
+  //return {name: doc.displayName, email: user.email, photoURL: user.photoURL};
+  return userManager.getCurrentUser();
 }
+
+onAuthStateChanged(getAuth(), (user) => {
+  userManager.setUser(user);
+});
+
+export const userManager = {
+  user: null,
+  subscribers: [],
+
+  async setUser(user) {
+    if(!user) {
+      this.user = null;
+      return;
+    }
+    const docSnap = await getDoc(doc(db, 'users', user.uid));
+    if(!docSnap.exists()) {
+      throw {code: 'auth/user-not-found-in-db'};
+    }
+    const userDoc = await docSnap.data();
+    this.user = {name: userDoc.displayName, email: user.email, photoURL: user.photoURL};
+
+    for(let i = 0, len = this.subscribers.length; i != len; ++i) {
+      this.subscribers[i](this.user);
+    }
+  },
+
+  getCurrentUser() {
+    return this.user;
+  },
+
+  subscribe(callback) {
+    this.subscribers.push(callback);
+  }
+};

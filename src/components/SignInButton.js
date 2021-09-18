@@ -2,6 +2,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
+import { userManager } from '../service.js';
 
 const useStyles = makeStyles({
   buttonStyle: {
@@ -24,3 +25,9 @@ export default function SignInButton() {
     </Stack>
   );
 }
+
+
+userManager.subscribe((user) => {
+  // TODO change state based on user
+  console.log(user);
+});

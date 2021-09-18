@@ -4,16 +4,27 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  fontStyle: {
+    color: "rgb(63, 61, 86); !important",
+    fontFamily: "Poppins !important",
+    textAlign: "center",
+  },
+});
 
 function Copyright() {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" color="text.secondary">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      class={classes.fontStyle}
+    >
+      <Link color="inherit" href="https://github.com/htn-2021/journaspect">
+        Hack the North 2021
       </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
