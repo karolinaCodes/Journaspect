@@ -112,7 +112,7 @@ function signUpUserWithEmailAndPassword(email, password, confirm_password) {
 
 
   try {
-    signUpUser(email, password, confirm_password);
+    signUpUser(email, password);
   } catch(e) {
     if(e.code === 'auth/email-already-in-use') {
       // TODO display error to user, perhaps modal?
