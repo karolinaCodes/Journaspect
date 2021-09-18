@@ -1,15 +1,29 @@
 import { searchJournalists } from "../service.js";
 import styles from "./SearchResults.module.css";
+import React from "react";
 
 import List from "../components/SearchResults/List";
 
-function SearchReults() {
-  // TODO diplay jounalist stuff
-  return (
-    <div className={styles.listStyles}>
-      <List />
-    </div>
-  );
+class SearchReults extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      results: []
+    }
+  }
+
+  async componentDidMount() {
+    const results = await getSearchResults();
+    this.setState({results: results});
+  }
+
+  render() {
+    return (
+      <div className={styles.listStyles}>
+        <List />
+      </div>
+    );
+  }
 }
 
 async function getSearchResults() {
