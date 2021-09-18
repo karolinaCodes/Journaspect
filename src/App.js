@@ -8,10 +8,13 @@ import AddJournalist from './pages/AddJournalist';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import SearchResults from './pages/SearchResults';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Fragment>
+      <Header />
     <Route path="/" exact>
       <HomePage/>
     </Route>
@@ -35,22 +38,8 @@ function App() {
       { /*need to make dynamic*/ }
       <SearchResults/>
     </Route>
+    <Footer />
     </Fragment>
   );
 }
-
-function Header() {
-  return (
-    <header id='site-header'>
-      <h1 id='site-logo'>Cut Thru</h1>
-      <form>
-        <label htmlFor='search' hidden>Search: </label>
-        <input type='text' required></input>
-        <button type='submit'>Search</button>
-      </form>
-      <a href='/sign-in'>Sign In</a>
-    </header>
-  );
-}
-
 export default App;
