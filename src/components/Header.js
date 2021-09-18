@@ -18,7 +18,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
@@ -87,6 +87,8 @@ export default function Header() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const history = useHistory();
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -103,6 +105,17 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const query = document.getElementById('header-search').value;
+    if(!query) {
+      return;
+    }
+    history.push('/searchresults?q=' + query);
+  };
+
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -196,10 +209,13 @@ export default function Header() {
             <SearchIconWrapper class={classes.headerColor}>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
+            <form onSubmit={handleSearch}>
+              <StyledInputBase
+                placeholder="Search…"
+                id='header-search'
+                inputProps={{ "aria-label": "search" }}
+              />
+            </form>
           </Search>
           <SignInButton />
         </Toolbar>

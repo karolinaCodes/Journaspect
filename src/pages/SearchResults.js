@@ -28,6 +28,7 @@ class SearchReults extends React.Component {
 
 async function getSearchResults() {
   const query = (new URLSearchParams(window.location.search)).get('q');
+  console.log(query);
   let results = await searchJournalists(query);
   console.log(results);
   return results;
