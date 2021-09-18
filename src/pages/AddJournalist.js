@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 function AddJournalist(){
-  const [displayPicture, setDisplayPicture] = React.useState(defaultProfile);
+  const [displayPicture, setDisplayPicture] = React.useState(null);
   const [preview, setPreview] = React.useState(defaultProfile);
 
   const handleSubmit = (event) => {
