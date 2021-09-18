@@ -16,7 +16,6 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
-import SignUpButton from "./SignUpButton";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -216,7 +215,6 @@ export default function Header() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}></Box>
           <SignInButton />
-          {/* <SignUpButton /> */}
         </Toolbar>
       </AppBar>
     </Box>
