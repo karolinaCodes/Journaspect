@@ -4,7 +4,6 @@ import Header from "../components/Header";
 function HomePage() {
   return (
     <div>
-      <Header />
       <svg
         className={styles.newpaperImg}
         id="a751cec9-7d0e-4c8a-a2d9-3a6c65a20454"
