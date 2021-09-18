@@ -2,7 +2,8 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
-import { userManager } from '../service.js';
+import { userManager } from "../service.js";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   buttonStyle: {
@@ -18,14 +19,14 @@ export default function SignInButton() {
   const classes = useStyles();
   return (
     <Stack spacing={2} direction="row">
-      {/* <Button variant="contained">Contained</Button> */}
-      <Button href="/signin" variant="contained" className={classes.buttonStyle}>
-        Sign In
-      </Button>
+      <Link to="/signin" style={{ textDecoration: "none" }}>
+        <Button variant="contained" className={classes.buttonStyle}>
+          Sign In
+        </Button>
+      </Link>
     </Stack>
   );
 }
-
 
 userManager.subscribe((user) => {
   // TODO change state based on user

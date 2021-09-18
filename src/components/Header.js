@@ -18,6 +18,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
     color: "rgb(63, 61, 86)",
     fontWeight: 600,
     // fontSize: "16px",
+    textDecoration: "none",
   },
 });
 
@@ -182,15 +184,13 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" class={classes.header}>
         <Toolbar>
-          <Button
-            href="/"
-            color="inherit"
-            style={{ backgroundColor: "transparent" }}
-          >
-            <Typography noWrap class={classes.typography}>
-              Journaspect
-            </Typography>
-          </Button>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button color="inherit" style={{ backgroundColor: "transparent" }}>
+              <Typography noWrap class={classes.typography}>
+                Journaspect
+              </Typography>
+            </Button>
+          </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
             <SearchIconWrapper class={classes.headerColor}>
