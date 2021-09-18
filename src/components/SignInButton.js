@@ -2,10 +2,11 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { makeStyles } from "@mui/styles";
-import { userManager } from '../service.js';
+import { userManager } from "../service.js";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   buttonStyle: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
 
 export default function SignInButton() {
   const classes = useStyles();
-  const [username, setUsername] = React.useState('');
+  const [username, setUsername] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -36,23 +37,27 @@ export default function SignInButton() {
   };
 
   userManager.subscribe((user) => {
-    if(user){
+    if (user) {
       setUsername(user.name);
     }
   });
 
-  return username === '' ? (
+  return username === "" ? (
     <Stack spacing={2} direction="row">
-      <Button href="/signin" variant="contained" className={classes.buttonStyle}>
-        Sign In
-      </Button>
+      <Link to="/signin" style={{ textDecoration: "none" }}>
+        <Button variant="contained" className={classes.buttonStyle}>
+          Sign In
+        </Button>
+      </Link>
     </Stack>
   ) : (
     <Stack spacing={2} direction="row">
-      <Button variant="contained" className={classes.buttonStyle} onClick={handleClick}>
-        <Typography>
-          {username[0]}
-        </Typography>
+      <Button
+        variant="contained"
+        className={classes.buttonStyle}
+        onClick={handleClick}
+      >
+        <Typography>{username[0]}</Typography>
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -60,12 +65,12 @@ export default function SignInButton() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
@@ -74,3 +79,8 @@ export default function SignInButton() {
     </Stack>
   );
 }
+
+userManager.subscribe((user) => {
+  // TODO change state based on user
+  console.log(user);
+});

@@ -24,7 +24,7 @@ function App() {
         <Route path="/myprofile" exact>
           <MyProfile />
         </Route>
-        <Route path="/journalistpage">
+        <Route path="/journalist">
           {/*need to make dynamic*/}
           <JournalistPage />
         </Route>
