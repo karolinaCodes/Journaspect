@@ -22,7 +22,7 @@ function SignUp(){
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log(data.get("email"));
-    signUpUserWithEmailAndPassword(data.get('email'), data.get('password'), data.get('name'));
+    signUpUserWithEmailAndPassword(data.get('email'), data.get('password'), data.get('Display_Name'));
     
   };
 

@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { signInUser } from '../service';
 
 const theme = createTheme();
 
@@ -21,10 +22,11 @@ function SignIn(){
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+      signInUser(data.get('email'), data.get('password'));
+    } catch(e) {
+      console.log("Error signing in");
+    }
   };
 
   return (
