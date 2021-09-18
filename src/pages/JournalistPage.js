@@ -1,5 +1,11 @@
-function JournalistPage(){
-  return <div>JournalistPage</div>
+import ProfileCard from "../components/JournalistPage/ProfileCard";
+
+function JournalistPage() {
+  return (
+    <div>
+      <ProfileCard />
+    </div>
+  );
 }
 
 export default JournalistPage;
