@@ -13,11 +13,11 @@ const useStyles = makeStyles({
 export default function MediaCard() {
   const classes = useStyles();
   return (
-    <Card sx={{ maxWidth: 220 }}>
+    <Card sx={{ maxHeight: 260, width: 250 }}>
       <CardMedia
         component="img"
         height="80%"
-        image="https://lh3.googleusercontent.com/proxy/t9p1UHlN3cwBkXcwcIBNM--DnRExCG2kyppsn_wuYs6pMBauZG5UbWlBq0JtlhG9qQUbuykIv3oiDzqqwhbQ9JbgXAZN"
+        image="https://globalnews.ca/wp-content/uploads/2017/04/2017-foyer-hed-serious.jpg?quality=85&strip=all&w=220"
         alt="green iguana"
       />
       <CardContent>
