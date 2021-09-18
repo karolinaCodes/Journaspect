@@ -24,7 +24,7 @@ export async function searchJournalist() {
 }
 
 export async function addJournalist(firstName, lastName, photoURL) {
-  const docRef = await addDoc(collection(db, 'journalist'), {
+  const docRef = await addDoc(collection(db, 'journalists'), {
     firstName: firstName,
     lastName: lastName,
     photoURL: photoURL
@@ -33,7 +33,8 @@ export async function addJournalist(firstName, lastName, photoURL) {
 }
 
 export async function getJournalist(id) {
-  const docSnap = await getDoc(doc(db, 'journalist', id));
+  const docSnap = await getDoc(doc(db, 'journalists', id));
+  
   return docSnap.data();
 }
 
