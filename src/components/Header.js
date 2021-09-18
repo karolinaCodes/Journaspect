@@ -19,7 +19,11 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import Context from "../store/context";
+import { useState } from "react";
 
+///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
   font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
   header: {
@@ -79,8 +83,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+///////////////////Styling/////////////////////////////
 
 export default function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const ctx = useContext(Context);
+
+  const saveQuery = function (e) {
+    setSearchQuery(e.target.value);
+  };
+
+  const getSearchQuery = function (e) {
+    ctx.searchQuery = searchQuery;
+    console.log(ctx);
+  };
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -193,12 +210,13 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
-            <SearchIconWrapper class={classes.headerColor}>
-              <SearchIcon />
-            </SearchIconWrapper>
+            {/* <SearchIconWrapper class={classes.headerColor}> */}
+            <SearchIcon style={{ zIndex: "100" }} onClick={getSearchQuery} />
+            {/* </SearchIconWrapper> */}
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={saveQuery}
             />
           </Search>
           <SignInButton />
