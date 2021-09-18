@@ -16,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 
-export async function getJournalist() {
+export async function searchJournalist() {
   const col = collection(db, 'journalist');
   const snap = await getDocs(col);
   const list = snap.docs.map(doc => doc.data());
