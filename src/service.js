@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9a01S71En19HM5yi1G3sftbuxvarjDrY",
@@ -16,7 +16,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 
-// Get a list of cities from your database
 export async function getJournalist() {
   const col = collection(db, 'journalist');
   const snap = await getDocs(col);
@@ -24,13 +23,17 @@ export async function getJournalist() {
   return list;
 }
 
-export async function signUpUser(email, password, firstName, lastName) {
-  
-  return await createUserWithEmailAndPassword(auth, email, password);
+export async function signUpUser(email, password, name, pictureURL) {
+  const user = await createUserWithEmailAndPassword(auth, email, password);
+  await updateProfile(user, {
+    displayName: name,
+    photoURL: pictureURL
+  });
+  return user;
 }
 
 export async function signInUser(email, password) {
-  return await signInWithEmailAndPassword(auth, email, password)
+  return await signInWithEmailAndPassword(auth, email, password);
 }
 
 
