@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
@@ -51,10 +51,10 @@ export async function getJournalist(id) {
 
 export async function signUpUser(email, password, name, photoURL) {
   console.log(name);
-  const q = query(collection(db, 'user'), where('displayName', '==', name));
+  const q = query(collection(db, 'users'), where('displayName', '==', name));
   const snap = await getDocs(q);
   if(snap.size) {
-    throw {code: 'auth/user-exists'};
+    throw {code: 'auth/username-exists'};
   }
   let user;
   try {
@@ -87,6 +87,11 @@ export async function signInUser(email, password) {
   //doc = docSnap.data();
   //return {name: doc.displayName, email: user.email, photoURL: user.photoURL};
   return userManager.getCurrentUser();
+}
+
+export async function signOutUser() {
+  await signOut(auth);
+  return true;
 }
 
 onAuthStateChanged(getAuth(), (user) => {
