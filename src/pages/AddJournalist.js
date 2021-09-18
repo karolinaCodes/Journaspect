@@ -10,21 +10,25 @@ import BackupIcon from '@mui/icons-material/Backup';
 import defaultProfile from '../assets/DefaultProfile.jpeg';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { addJournalist } from '../service.js';
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
 function AddJournalist(){
   const [displayPicture, setDisplayPicture] = React.useState(null);
   const [preview, setPreview] = React.useState(defaultProfile);
+  const history = useHistory();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    let id;
     try {
-      addJournalist(data.get('First Name'), data.get('Last Name'), displayPicture);
+      id = await addJournalist(data.get('First Name'), data.get('Last Name'), displayPicture);
     } catch(e) {
       console.warn('Error adding journalist');
     }
+    history.push('/journalist/' + id);
   };
 
   const handlePreview = (event) => {
