@@ -41,25 +41,15 @@ function SignUp(){
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="fname"
-                  name="firstName"
+                  name="Display Name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="Display Name"
+                  label="Display Name"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -80,6 +70,17 @@ function SignUp(){
                   label="Password"
                   type="password"
                   id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirm_password"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirm_password"
                   autoComplete="new-password"
                 />
               </Grid>
@@ -106,10 +107,10 @@ function SignUp(){
   );
 }
 
-function signUp(email, password) {
+function signUp(email, password, confirm_password) {
   // TODO hook this up to form
   try {
-    signUpUser(email, password);
+    signUpUser(email, password, confirm_password);
   } catch(e) {
     if(e.code === 'auth/email-already-in-use') {
       // TODO display error to user, perhaps modal?
