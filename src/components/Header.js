@@ -30,6 +30,7 @@ const useStyles = makeStyles({
     fontFamily: "Poppins",
     color: "rgb(63, 61, 86)",
     fontWeight: 600,
+    // fontSize: "16px",
   },
 });
 
@@ -63,6 +64,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
+  width: "300px",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -70,7 +72,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "300px",
+      // width:"20ch"
     },
   },
 }));
@@ -179,11 +182,12 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" class={classes.header}>
         <Toolbar>
-          <Button href="/" color="inherit" style={{ backgroundColor: 'transparent'}}>
-            <Typography
-              noWrap
-              class={classes.typography}
-            >
+          <Button
+            href="/"
+            color="inherit"
+            style={{ backgroundColor: "transparent" }}
+          >
+            <Typography noWrap class={classes.typography}>
               Journaspect
             </Typography>
           </Button>
