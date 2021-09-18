@@ -1,6 +1,5 @@
 import styles from "./HomePage.module.css";
 
-import Header from "../components/Header";
 function HomePage() {
   return (
     <div>

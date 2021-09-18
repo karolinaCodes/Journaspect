@@ -18,7 +18,7 @@ export default function SignInButton() {
   return (
     <Stack spacing={2} direction="row">
       {/* <Button variant="contained">Contained</Button> */}
-      <Button variant="contained" className={classes.buttonStyle}>
+      <Button href="/signin" variant="contained" className={classes.buttonStyle}>
         Sign In
       </Button>
     </Stack>
