@@ -28,7 +28,7 @@ export default function StickyFooter() {
       }}
     >
       <CssBaseline />
-      <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+      <Container component="main" sx={{ mt: 42, mb: 42 }} maxWidth="sm">
         <Typography variant="h2" component="h1" gutterBottom>
         </Typography>
         <Typography variant="body1"></Typography>
@@ -37,7 +37,7 @@ export default function StickyFooter() {
         component="footer"
         sx={{
           py: 3,
-          px: 2,
+          px: 10,
           mt: 'auto',
           backgroundColor: (theme) =>
             theme.palette.mode === 'light'
