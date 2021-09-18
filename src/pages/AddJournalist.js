@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import BackupIcon from '@mui/icons-material/Backup';
 import defaultProfile from '../assets/DefaultProfile.jpeg';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { addJournalist } from '../service.js';
 
 const theme = createTheme();
 
@@ -19,9 +20,11 @@ function AddJournalist(){
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.get('First Name'), data.get('Last Name'));
-    console.log(displayPicture);
-    // signUp(data.get('email'), data.get('password'));
+    try {
+      addJournalist(data.get('First Name'), data.get('Last Name'), displayPicture);
+    } catch(e) {
+      console.warn('Error adding journalist');
+    }
   };
 
   const handlePreview = (event) => {
