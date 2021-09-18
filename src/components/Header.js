@@ -18,14 +18,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import Context from "../store/context";
 import { useState } from "react";
-=======
-import { Link, useHistory } from "react-router-dom";
->>>>>>> fd59db3dc423b54bb4c77f4444220aa974570642
 
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
@@ -227,16 +223,6 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
-<<<<<<< HEAD
-            {/* <SearchIconWrapper class={classes.headerColor}> */}
-            <SearchIcon style={{ zIndex: "100" }} onClick={getSearchQuery} />
-            {/* </SearchIconWrapper> */}
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              onChange={saveQuery}
-            />
-=======
             <SearchIconWrapper class={classes.headerColor}>
               <SearchIcon />
             </SearchIconWrapper>
@@ -247,7 +233,6 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
               />
             </form>
->>>>>>> fd59db3dc423b54bb4c77f4444220aa974570642
           </Search>
           <SignInButton />
         </Toolbar>
