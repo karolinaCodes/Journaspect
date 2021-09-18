@@ -216,7 +216,7 @@ export default function Header() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}></Box>
           <SignInButton />
-          <SignUpButton />
+          {/* <SignUpButton /> */}
         </Toolbar>
       </AppBar>
     </Box>
