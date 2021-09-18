@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important",
     textAlign: "center",
   },
+  // footerStyles: { position: "absolute", bottom: " 0", left: "0", right: "0" },
 });
 
 function Copyright() {
@@ -30,6 +31,7 @@ function Copyright() {
 }
 
 export default function StickyFooter() {
+  const classes = useStyles();
   return (
     <Box
       component="footer"
