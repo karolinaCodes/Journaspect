@@ -1,4 +1,5 @@
 import styles from "./HomePage.module.css";
+import MediaCard from "../components/Trending/Trending";
 
 function HomePage() {
   return (
@@ -219,6 +220,7 @@ function HomePage() {
           <circle cx="159" cy="328.15774" r="15" fill="#f2f2f2" />
         </svg>
       </div>
+      <MediaCard />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
@@ -178,32 +179,14 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" class={classes.header}>
         <Toolbar>
-          <IconButton href="/" color="inherit" style={{ backgroundColor: 'transparent', borderRadius: '0px' }}>
-            <svg
-              width="25px"
-              xmlns="http://www.w3.org/2000/svg"
-              className={("h-6 w-6", classes.headerColor)}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-              />
-            </svg>
+          <Button href="/" color="inherit" style={{ backgroundColor: 'transparent'}}>
             <Typography
-              variant="h6"
               noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
               class={classes.typography}
             >
               Journaspect
             </Typography>
-          </IconButton>
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
             <SearchIconWrapper class={classes.headerColor}>

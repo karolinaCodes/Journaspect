@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const firebaseConfig = {
@@ -23,20 +23,59 @@ export async function getJournalist() {
   return list;
 }
 
-/*  export async function addJournalist(){
-
-}  */
-
-export async function signUpUser(Display_Name,email, password, confirm_password, pictureURL) {
-  const user = await createUserWithEmailAndPassword(auth, email, password, confirm_password);
-  await updateProfile(user, {
-    photoURL: pictureURL
+export async function addJournalist(firstName, lastName, photoURL) {
+  const docRef = await addDoc(collection(db, 'journalist'), {
+    firstName: firstName,
+    lastName: lastName,
+    photoURL: photoURL
   });
-  return user;
+  return docRef.id;
+}
+
+export async function getJournalist(id) {
+  const docSnap = await getDoc(doc(db, 'journalist', id));
+  return docSnap.data();
+}
+
+export async function signUpUser(email, password, name, photoURL) {
+  const q = query(collection(db, 'user'), where('displayName', '==', name));
+  const snap = await getDocs(q);
+  if(snap.size) {
+    throw {code: 'auth/user-exists'};
+  }
+  let user;
+  try {
+    user = (await createUserWithEmailAndPassword(auth, email, password)).user;
+  } catch(e) {
+    if(e.code === 'auth/email-already-in-use') {
+      throw e;
+    } else {
+      throw {code: 'auth/undefined'}
+    }
+  }
+  try {
+    await setDoc(doc(db, 'users', user.uid), {displayName: name});
+  } catch(e) {
+    throw {code: 'auth/undefined'}
+  }
+  await updateProfile(user, {
+    photoURL: photoURL
+  });
+  console.log(user);
+  return {
+    name: name, 
+    photoURL: photoURL,
+    email: email
+  };
 }
 
 export async function signInUser(email, password) {
-  return await signInWithEmailAndPassword(auth, email, password);
+  let user;
+  user = (await signInWithEmailAndPassword(auth, email, password)).user;
+  const docSnap = await getDoc(doc(db, 'users', user.uid));
+  if(!docSnap.exists) {
+    throw {code: 'auth/user-not-found-in-db'};
+  }
+  doc = doc.data();
+  return {name: doc.displayName, email: user.email, pictureURL: user.photoURL};
 }
-
-
