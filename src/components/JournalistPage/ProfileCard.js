@@ -41,7 +41,7 @@ const useStyles = makeStyles({
 export default function ProfileCard() {
   const classes = useStyles();
   return (
-    <Card sx={{ width: "30vw", height: "100vh", borderRadius: "0", display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+    <Card sx={{ width: "320px", height: "100vh", borderRadius: "0", display: "flex", flexDirection: 'column', alignItems: 'center' }}>
       <div className={classes.pictureDiv} />
         <CardMedia
           component="img"
