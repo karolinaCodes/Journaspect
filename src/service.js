@@ -151,32 +151,44 @@ export async function addJournalistReview(journalistId, user, review) {
   const ratings = {};
   if(review.overallRating) {
     ratings.overallNum = increment(1);
-    ratings.overallRating = review.overallRating;
+    ratings.overallRating = increment(review.overallRating);
   }
   if(review.ethicsRating) {
     ratings.ethicsNum = increment(1);
-    ratings.ethicsRating = review.ethicsRating;
+    ratings.ethicsRating = increment(review.ethicsRating);
   }
   if(review.writingRating) {
     ratings.writingNum = increment(1);
-    ratings.writingRating = review.writingRating;
+    ratings.writingRating = increment(review.writingRating);
   }
   if(review.accuracyRating) {
     ratings.accuracyNum = increment(1);
-    ratings.accuracyRating = review.accuracyRating;
+    ratings.accuracyRating = increment(review.accuracyRating);
   }
   if(review.politicalRating) {
     ratings.politicalTotal = increment(1);
-    ratings.politicalRating = review.politicalRating;
+    ratings.politicalRating = increment(review.politicalRating);
   }
   await updateDoc(doc(db, 'journalists', journalistId), ratings);
   //Uncaught (in promise) FirebaseError: Function addDoc() called with invalid data. Unsupported field value: undefined (found in field reviewerPhotoURL in document journalists/2FKmSKPDcuP68yr83paV/reviews/o641S54tuTZjAmw8XkD9)
   const docRef = await addDoc(collection(db, 'journalists/' + journalistId + '/reviews'), {
     reviewer: user.name,
-    reviewerPhotoURL: user.photURL,
+    reviewerPhotoURL: user.photoURL,
     review: review.writtenReview,
   });
 
   console.log(docRef);
   return docRef.data();
+}
+
+export async function getJournalistReview(id) {
+  const docSnaps = await getDocs(collection(db, 'journalists/' + id + '/review'));
+
+  const col = query(collection(db, 'journalists/' + id + '/review'));
+  const docSnaps = await getDocs(col);
+  const reviews = [];
+  for(const snap of docSnaps) {
+    reviews.push(snap.data());
+  }
+  return reviews;
 }
