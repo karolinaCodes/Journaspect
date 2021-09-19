@@ -18,19 +18,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import Context from "../store/context";
 import { useState } from "react";
-// import { useHistory } from "react";
+import { useHistory } from "react-router-dom";
 import { searchJournalists } from "../service.js";
-=======
-import { Link, useHistory } from "react-router-dom";
-import { useContext } from "react";
-import Context from "../store/context";
-import { useState } from "react";
->>>>>>> 705f0efda9eab17ab5de10fbac772b7276160b44
 
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
@@ -96,8 +87,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
-  const ctx = useContext(Context);
-  // const history = useHistory();
+  const history = useHistory();
 
   const saveQuery = function (e) {
     setSearchQuery(e.target.value);
@@ -109,10 +99,6 @@ export default function Header() {
     console.log(results);
     return results;
   }
-
-  const getSearchQuery = function (e) {
-    getSearchResults(searchQuery);
-  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -139,11 +125,11 @@ export default function Header() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    const query = document.getElementById("header-search").value;
-    if (!query) {
+    if (!searchQuery) {
       return;
     }
-    // history.push("/searchresults?q=" + query);
+    history.push("/searchresults?q=" + searchQuery);
+    getSearchResults();
   };
 
   const menuId = "primary-search-account-menu";
@@ -235,27 +221,14 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
-<<<<<<< HEAD
             {/* <SearchIconWrapper class={classes.headerColor}> */}
-            <SearchIcon style={{ zIndex: "100" }} onClick={getSearchQuery} />
+            <SearchIcon style={{ zIndex: "100" }} onClick={handleSearch} />
             {/* </SearchIconWrapper> */}
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               onChange={saveQuery}
             />
-=======
-            <SearchIconWrapper class={classes.headerColor}>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <form onSubmit={handleSearch}>
-              <StyledInputBase
-                placeholder="Search…"
-                id='header-search'
-                inputProps={{ "aria-label": "search" }}
-              />
-            </form>
->>>>>>> 705f0efda9eab17ab5de10fbac772b7276160b44
           </Search>
           <SignInButton />
         </Toolbar>
