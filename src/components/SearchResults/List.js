@@ -9,6 +9,7 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import styles from "./List.module.css";
 import Context from "../../store/context";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -31,6 +32,13 @@ const useStyles = makeStyles({
 
 export default function FolderList(props) {
   const classes = useStyles();
+  const history = useHistory();
+
+
+  function navigateToJournalist(e) {
+    console.log(e.currentTarget.dataset.id);
+    history.push('journalist/' + e.currentTarget.dataset.id);
+  }
 
   return (
     //render card based on the array that get back
@@ -46,13 +54,13 @@ export default function FolderList(props) {
           }}
         >
           {props.value.map((result) => (
-            <div>
+            <div onClick={navigateToJournalist} data-id={result.id}>
               <ListItem>
                 <div className={classes.pictureDiv} />
                   <CardMedia
                     component="img"
                     className={classes.profileImgStyles}
-                    image={result.photURL}
+                    image={result.photoURL}
                     alt="Profile Page"
                   />
                 <div />

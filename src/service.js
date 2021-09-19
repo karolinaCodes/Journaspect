@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc, updateDoc, increment } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB9a01S71En19HM5yi1G3sftbuxvarjDrY",
@@ -25,8 +25,17 @@ export async function searchJournalists(queryString) {
   const tokens = queryString.trim().split(' ');
   const col = query(collection(db, 'journalists'), where('tags', 'array-contains-any', tokens));
   const snap = await getDocs(col);
-  const list = snap.docs.map(doc => doc.data());
-  return list;
+  const journalists = [];
+  for(const doc of snap.docs) {
+    journalists.push(normalizeJournalist(doc));
+  }
+  return journalists;
+}
+
+function normalizeJournalist(doc) {
+  const journalist = doc.data();
+  journalist.id = doc.id;
+  return journalist;
 }
 
 export async function addJournalist(firstName, lastName, photoFile) {
@@ -36,10 +45,11 @@ export async function addJournalist(firstName, lastName, photoFile) {
   await uploadBytes(imageRef, photoFile);
   console.log('file-uploaded');
 
+  const photoURL = await getDownloadURL(ref(storage, path));
   const docRef = await addDoc(collection(db, 'journalists'), {
     firstName: firstName,
     lastName: lastName,
-    photoURL: 'images/' + photoFile.name,
+    photoURL: photoURL,
     tags: [firstName.toLowerCase(), lastName.toLowerCase()]
   });
   return docRef.id;
@@ -50,7 +60,9 @@ export async function getJournalist(id) {
   if(!docSnap.exists()) {
     return null;
   }
-  return docSnap.data();
+  const journalist = docSnap.data();
+  journalist.id = docSnap.id;
+  return journalist;
 }
 
 export async function signUpUser(email, password, name, photoURL) {
