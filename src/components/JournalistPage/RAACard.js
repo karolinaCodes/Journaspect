@@ -42,18 +42,14 @@ export default function RAACard() {
 
   const user = userManager.getCurrentUser();
 
-  async function getReviews() {
-    setReviews(
-      await getJournalistReview(window.location.pathname.split("/")[2])
-    );
+  async function setupReviews() {
+    setReviews(await getJournalistReview(window.location.pathname.split('/')[2]));
   }
 
-  try {
-    getReviews();
-  } catch (e) {
-    console.log("Error getting the journalist");
-  }
-
+  React.useEffect(() => {
+    setupReviews();
+  }, []);
+  
   const handleChange = (event, newValue) => {
     event.preventDefault();
     setTabValue(newValue);
