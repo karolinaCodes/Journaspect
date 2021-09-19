@@ -180,7 +180,6 @@ export async function addJournalistReview(journalistId, user, review) {
 
 export async function getJournalistReview(id) {
   const docSnaps = await getDocs(collection(db, 'journalists/' + id + '/reviews'));
-  console.log(docSnaps);
   const reviews = [];
   docSnaps.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
