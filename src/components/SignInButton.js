@@ -79,8 +79,3 @@ export default function SignInButton() {
     </Stack>
   );
 }
-
-userManager.subscribe((user) => {
-  // TODO change state based on user
-  console.log(user);
-});

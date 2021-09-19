@@ -12,7 +12,6 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     maxWidth: "50%",
     maxHeight: "50%"
-    // padding: "10px",
   },
   pictureDiv: {
     width: "100%",
@@ -41,7 +40,7 @@ const useStyles = makeStyles({
 export default function ProfileCard() {
   const classes = useStyles();
   return (
-    <Card sx={{ width: "30vw", height: "100vh", borderRadius: "0", display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+    <Card sx={{ height: "100vh", borderRadius: "0", display: "flex", flexDirection: 'column', alignItems: 'center', width: '350px' }}>
       <div className={classes.pictureDiv} />
         <CardMedia
           component="img"
@@ -57,7 +56,7 @@ export default function ProfileCard() {
         <Typography>
           Overall Rating:
         </Typography>
-        <div>
+        <div style={{display: "flex"}}>
           <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon />
         </div>
       </div>
@@ -66,7 +65,7 @@ export default function ProfileCard() {
           <Typography className={classes.singleRatingsDiv}>
             Ethics
           </Typography>
-          <div>
+          <div style={{display: "flex"}}>
             <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon />
           </div>
         </div>
@@ -74,7 +73,7 @@ export default function ProfileCard() {
           <Typography className={classes.singleRatingsDiv}>
             Writing
           </Typography>
-          <div>
+          <div style={{display: "flex"}}>
             <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
           </div>
         </div>
@@ -82,7 +81,7 @@ export default function ProfileCard() {
           <Typography className={classes.singleRatingsDiv}>
             Accuracy
           </Typography>
-          <div>
+          <div style={{display: "flex"}}>
             <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon />
           </div>
         </div>
@@ -90,7 +89,7 @@ export default function ProfileCard() {
           <Typography className={classes.singleRatingsDiv}>
             Political Standing
           </Typography>
-          <div>
+          <div style={{display: "flex"}}>
             <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
           </div>
         </div>
