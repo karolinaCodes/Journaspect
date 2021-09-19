@@ -44,14 +44,14 @@ export default function FolderList() {
             />
           </ListItemAvatar>
           <div>
-            <Typography variant="h5" component="div" class={classes.nameStyles}>
+            <Typography variant="h5" component="div" className={classes.nameStyles}>
               Elon Musk
             </Typography>
             <Typography
               variant="body2"
               component="div"
               color="text.secondary"
-              class={classes.rating}
+              className={classes.rating}
             >
               RATING
             </Typography>
@@ -68,14 +68,14 @@ export default function FolderList() {
             />
           </ListItemAvatar>
           <div>
-            <Typography variant="h5" component="div" class={classes.nameStyles}>
+            <Typography variant="h5" component="div" className={classes.nameStyles}>
               Elon Musk
             </Typography>
             <Typography
               variant="body2"
               component="div"
               color="text.secondary"
-              class={classes.rating}
+              className={classes.rating}
             >
               RATING
             </Typography>

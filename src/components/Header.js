@@ -22,9 +22,6 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
-  header: {
-    background: "rgb(248,248,255)",
-  },
   headerColor: { color: "rgb(63, 61, 86)" },
   typography: {
     marginLeft: "10px !important",
@@ -182,18 +179,18 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" class={classes.header}>
+      <AppBar position="static" color='default'>
         <Toolbar>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Button color="inherit" style={{ backgroundColor: "transparent" }}>
-              <Typography noWrap class={classes.typography}>
+              <Typography noWrap className={classes.typography}>
                 Journaspect
               </Typography>
             </Button>
           </Link>
           <Box sx={{ flexGrow: 1 }} />
-          <Search class={(classes.headerColor, classes.searchBar)}>
-            <SearchIconWrapper class={classes.headerColor}>
+          <Search className={classes.headerColor}>
+            <SearchIconWrapper className={classes.headerColor}>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
