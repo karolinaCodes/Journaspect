@@ -14,10 +14,8 @@ class JournalistPage extends React.Component {
 
   async componentDidMount() {
     const id = window.location.pathname.split('/')[2];
-    console.log(id);
     const journalist = await getJournalist(id);
     this.setState({journalist: journalist});
-    console.log(journalist);
   }
 
   render() {

@@ -60,32 +60,32 @@ export default function ProfileCard(props) {
         <Typography>
           Overall Rating:
         </Typography>
-        {journalist.overallRating ? <Rating value={journalist.overallRating} readOnly /> : <div />}
+        {journalist.overallRating ? <Rating value={journalist.overallRating / journalist.overallNum} readOnly /> : <div />}
       </div>
       <div className={classes.ratingsDiv}>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Ethics
           </Typography>
-          {journalist.ethicsRating ? <Rating value={journalist.ethicsRating} readOnly /> : <div />}
+          {journalist.ethicsRating ? <Rating value={journalist.ethicsRating / journalist.ethicsNum} readOnly /> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Writing
           </Typography>
-          {journalist.writingRating ? <Rating value={journalist.writingRating} readOnly /> : <div />}
+          {journalist.writingRating ? <Rating value={journalist.writingRating / journalist.writingNum} readOnly /> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Accuracy
           </Typography>
-          {journalist.accuracyRating ? <Rating value={journalist.accuracyRating} readOnly /> : <div />}
+          {journalist.accuracyRating ? <Rating value={journalist.accuracyRating / journalist.accuracyNum} readOnly /> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Political Standing
           </Typography>
-          {journalist.politicalRating ? <Rating value={journalist.politicalRating} readOnly /> : <div />}
+          {journalist.politicalRating ? <Rating value={journalist.politicalRating / journalist.politicalTotal} readOnly /> : <div />}
         </div>
       </div>
     </Card>

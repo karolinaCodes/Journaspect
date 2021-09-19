@@ -11,7 +11,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Rating from "@mui/material/Rating";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
-import { addJournalistReview, userManager } from '../../service.js';
+import { addJournalistReview, userManager, getJournalistReview } from '../../service.js';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -23,11 +24,22 @@ const useStyles = makeStyles({
 export default function RAACard() {
   const classes = useStyles();
   const [tabValue, setTabValue] = React.useState('one');
+  const history = useHistory();
   const [addReview, setAddReview] = React.useState(false);
-  const [reviews, setReviews] = React.useState([{first: 'Elon', last: 'Musk', profilePicture: 'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg', review: 'This was very well done but bla bla bla'}, {first: 'Jeff', last: 'Bezos', profilePicture: 'https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5bb22ae84bbe6f67d2e82e05%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D627%26cropX2%3D1639%26cropY1%3D129%26cropY2%3D1142', review: 'This was poorly done bla bla bla'}]);
+  const [reviews, setReviews] = React.useState([]);
   const [reviewRating, setReviewRating] = React.useState({overallRating: 0, ethicsRating: 0, writingRating: 0, accuracyRating: 0, politicalRating: 0, writtenReview: ''});
 
   const user = userManager.getCurrentUser();
+
+  async function getReviews() {
+    setReviews(await getJournalistReview(window.location.pathname.split('/')[2]));
+  }
+
+  try {
+    getReviews();
+  } catch (e) {
+    console.log('Error getting the journalist');
+  }
   
   const handleChange = (event, newValue) => {
     event.preventDefault();
@@ -39,8 +51,15 @@ export default function RAACard() {
   };
   
   const handleSubmitReview = (event) => {
-    addJournalistReview(window.location.pathname.split('/')[2], user, reviewRating);
-    toggleAddReview();
+    try {
+      addJournalistReview(window.location.pathname.split('/')[2], user, reviewRating);
+    } catch (e) {
+      console.log('Add journalist review error');
+    } finally {
+      toggleAddReview();
+      history.go(0);
+    }
+    
     event.preventDefault();
   };
 
@@ -126,14 +145,14 @@ export default function RAACard() {
                 <ListItemAvatar>
                   <img
                     className={classes.profileImgStyles}
-                    src={item.profilePicture}
+                    src={item.reviewerPhotoURL}
                     alt="Profile Picture"
                     width="100px"
                   />
                 </ListItemAvatar>
                 <div>
                   <Typography variant="h5" component="div" className={classes.nameStyles}>
-                    {item.first + ' ' + item.last}
+                    {item.reviewer}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -147,6 +166,9 @@ export default function RAACard() {
               </ListItem>
             </div>
           ))}
+          <br />
+          <br />
+          <br />
         </div>
       ) : (
         <div>

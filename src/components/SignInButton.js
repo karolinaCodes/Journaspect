@@ -33,20 +33,24 @@ export default function SignInButton() {
   };
 
   const handleProfile = () => {
+<<<<<<< HEAD
     
+=======
+    //href to the user profile here
+    history.push('/myprofile');
+>>>>>>> 651d68c73abcec3ba2b4fd28ebb7f6812ae4fa99
     setAnchorEl(null);
   };
   
   const handleLogout = () => {
     try {
-      signOutUser();
+      if(signOutUser()) {
+        history.go(0);
+        setAnchorEl(null);
+      }
     } catch (e) {
       console.log('Error signing out');
     }
-    finally {
-      history.go(0);
-    }
-    setAnchorEl(null);
   };
 
   userManager.subscribe((user) => {

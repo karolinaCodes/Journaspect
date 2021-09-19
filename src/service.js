@@ -107,6 +107,7 @@ export async function signInUser(email, password) {
 
 export async function signOutUser() {
   await signOut(auth);
+  console.log('signed out');
   return true;
 }
 
@@ -186,8 +187,13 @@ export async function addJournalistReview(journalistId, user, review) {
 export async function getJournalistReview(id) {
   const docSnaps = await getDocs(collection(db, 'journalists/' + id + '/reviews'));
   const reviews = [];
-  for(const snap of docSnaps) {
-    reviews.push(snap.data());
-  }
+  docSnaps.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    reviews.push(doc.data());
+  });
+  
+  console.log(reviews);
   return reviews;
 }
+
+getJournalistReview('JvdzAyaobewsb6Ymwoex');
