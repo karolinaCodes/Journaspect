@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import styles from "./List.module.css";
 import Context from "../../store/context";
 import { useHistory } from "react-router-dom";
+import Rating from "../Rating";
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
     fontSize: "18px",
     margin: "0px 0px 10px 10px",
   },
-  rating: { margin: "0px 0px 15px 10px", fontFamily: "Poppins" },
+  rating: { margin: "0px 0px 15px 10px", fontFamily: "Poppins", display: 'inline-flex' },
 });
 
 export default function FolderList(props) {
@@ -68,7 +69,7 @@ export default function FolderList(props) {
                   <Typography
                     variant="h5"
                     component="div"
-                    class={classes.nameStyles}
+                    className={classes.nameStyles}
                   >
                     {`${result.firstName} ${result.lastName}`}
                   </Typography>
@@ -76,9 +77,9 @@ export default function FolderList(props) {
                     variant="body2"
                     component="div"
                     color="text.secondary"
-                    class={classes.rating}
+                    className={classes.rating}
                   >
-                    RATING:
+                    RATING:&nbsp;{result.overallRating ? <Rating value={result.overallRating}/> : <div>None</div>}
                   </Typography>
                 </div>
               </ListItem>

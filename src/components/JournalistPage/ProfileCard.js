@@ -1,11 +1,9 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { makeStyles } from "@mui/styles";
 import CardMedia from "@mui/material/CardMedia";
+import Rating from "../Rating";
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -62,42 +60,32 @@ export default function ProfileCard(props) {
         <Typography>
           Overall Rating:
         </Typography>
-        <div style={{display: "flex"}}>
-          <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon />
-        </div>
+        {journalist.overallRating ? <Rating value={journalist.overallRating}/> : <div />}
       </div>
       <div className={classes.ratingsDiv}>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Ethics
           </Typography>
-          <div style={{display: "flex"}}>
-            <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon />
-          </div>
+          {journalist.ethicsRating ? <Rating value={journalist.ethicsRating}/> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Writing
           </Typography>
-          <div style={{display: "flex"}}>
-            <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
-          </div>
+          {journalist.writingRating ? <Rating value={journalist.writingRating}/> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Accuracy
           </Typography>
-          <div style={{display: "flex"}}>
-            <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon />
-          </div>
+          {journalist.accuracyRating ? <Rating value={journalist.accuracyRating}/> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Political Standing
           </Typography>
-          <div style={{display: "flex"}}>
-            <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
-          </div>
+          {journalist.politicalRating ? <Rating value={journalist.politicalRating}/> : <div />}
         </div>
       </div>
     </Card>
