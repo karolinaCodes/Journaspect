@@ -24,9 +24,12 @@ const useStyles = makeStyles({
   rating: { margin: "0px 0px 15px 10px", fontFamily: "Poppins" },
 });
 
-export default function FolderList() {
+export default function FolderList(props) {
   const classes = useStyles();
   const ctx = useContext(Context);
+
+  console.log(props.value);
+
   return (
     //render card based on the array that get back
     <div>

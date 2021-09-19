@@ -22,7 +22,7 @@ class SearchResults extends React.Component {
   render() {
     return (
       <div className={styles.listStyles}>
-        <List />
+        <List value={this.state.results} />
       </div>
     );
   }
