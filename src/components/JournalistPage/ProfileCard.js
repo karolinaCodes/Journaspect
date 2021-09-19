@@ -37,8 +37,14 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ProfileCard() {
+export default function ProfileCard(props) {
+  console.log(props);
+  const journalist = props.value;
+  console.log(journalist);
   const classes = useStyles();
+  if(!props.value) {
+    return (<div>Loading</div>);
+  }
   return (
     <Card sx={{ height: "100vh", borderRadius: "0", display: "flex", flexDirection: 'column', alignItems: 'center', width: '350px' }}>
       <div className={classes.pictureDiv} />
@@ -51,7 +57,7 @@ export default function ProfileCard() {
         />
       <div />
       <Typography variant="h4">
-        Elon Musk
+        {journalist.firstName} {journalist.lastName} 
       </Typography>
       <div className={classes.singleRatingsDiv}>
         <Typography>

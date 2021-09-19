@@ -4,20 +4,27 @@ import RAACard from '../components/JournalistPage/RAACard';
 import { getJournalist } from '../service.js';
 
 class JournalistPage extends React.Component {
-  journalist = null;
+
+  constructor() {
+    super();
+    this.state = {
+      journalist: null
+    };
+  }
 
   async componentDidMount() {
     const id = window.location.pathname.split('/')[2];
     console.log(id);
-    this.journalist = await getJournalist(id);
-    console.log(this.journalist);
+    const journalist = await getJournalist(id);
+    this.setState({journalist: journalist});
+    console.log(journalist);
   }
 
   render() {
     return (
       <div style={{ display: "flex", flexDirection: 'row' }}>
-        <ProfileCard value={this.jjournalist} />
-        <RAACard value={this.journalist} />
+        <ProfileCard value={this.state.journalist} />
+        <RAACard value={this.state.journalist} />
       </div>
     );
   }

@@ -137,23 +137,23 @@ export async function addJournalistReview(journalistId, user, review) {
   const ratings = {};
   if(review.overallRating) {
     ratings.overallNum = increment(1);
-    ratings.overallRating = review.ethicsRating;
+    ratings.overallRating = increment(review.overallRating);
   }
   if(review.ethicsRating) {
     ratings.ethicsNum = increment(1);
-    ratings.ethicsTotal = review.ethicsRating;
+    ratings.ethicsRating = increment(review.ethicsRating);
   }
   if(review.writingRating) {
     ratings.writingNum = increment(1);
-    ratings.writingTotal = review.ethicsRating;
+    ratings.writingRating = increment(review.writingRating);
   }
   if(review.accuracyRating) {
     ratings.accuracyNum = increment(1);
-    ratings.accuracyTotal = review.ethicsRating;
+    ratings.accuracyRating = review.accuracyRating;
   }
   if(review.politicalRating) {
     ratings.politicalTotal = increment(1);
-    ratings.politicalRating = review.ethicsRating;
+    ratings.politicalRating = increment(review.politicalRating);
   }
   await updateDoc(doc(db, 'journalists', journalistId), ratings);
   const docRef = await addDoc(collection(db, 'journalists/' + journalistId + '/reviews'), {
