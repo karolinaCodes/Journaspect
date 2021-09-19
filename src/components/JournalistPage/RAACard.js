@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
+import { addJournalistReview, userManager } from '../../service.js'
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -34,7 +35,9 @@ export default function RAACard() {
     setAddReview(!addReview);
   };
   
-  const handleSubmitReview = () => {
+  const handleSubmitReview = (event) => {
+    const data = new FormData(event.currentTarget);
+    //addJournalistReview(data.get);
     console.log('Submit review');
   };
 
@@ -68,7 +71,7 @@ export default function RAACard() {
                       />
                     </FormControl>
                     <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                      <Button onClick={handleSubmitReview}>
+                      <Button onClick={handleSubmitReview} type='submit'>
                         Submit
                       </Button>
                       <Button onClick={toggleAddReview}>

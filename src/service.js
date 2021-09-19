@@ -47,7 +47,9 @@ export async function addJournalist(firstName, lastName, photoFile) {
 
 export async function getJournalist(id) {
   const docSnap = await getDoc(doc(db, 'journalists', id));
-
+  if(!docSnap.exists()) {
+    return null;
+  }
   return docSnap.data();
 }
 
@@ -130,7 +132,7 @@ export const userManager = {
   }
 };
 
-export async function addReview(journalistId, user, review) {
+export async function addJournalistReview(journalistId, user, review) {
   // TODO atomic
   const ratings = {};
   if(review.overallRating) {
@@ -148,6 +150,10 @@ export async function addReview(journalistId, user, review) {
   if(review.accuracyRating) {
     ratings.accuracyNum = increment(1);
     ratings.accuracyTotal = review.ethicsRating;
+  }
+  if(review.politicalRating) {
+    ratings.politicalTotal = increment(1);
+    ratings.politicalRating = review.ethicsRating;
   }
   await updateDoc(doc(db, 'journalists', journalistId), ratings);
   const docRef = await addDoc(collection(db, 'journalists/' + journalistId + '/reviews'), {
