@@ -15,29 +15,38 @@ const useStyles = makeStyles({
   profileImgStyles: {
     borderRadius: "50%",
     maxWidth: "10%",
-    maxHeight: "10%"
+    maxHeight: "10%",
+    height: "60px",
   },
   pictureDiv: {
-    display: 'flex',
-    justifyContent: 'flex-start'
+    display: "flex",
+    justifyContent: "flex-start",
   },
   nameStyles: {
     fontFamily: "Poppins",
-    fontWeight: "600",
-    fontSize: "18px",
-    margin: "0px 0px 10px 10px",
+    fontWeight: "500",
+    fontSize: "20px",
+    margin: "0px 0px 0px 10px",
   },
-  rating: { margin: "0px 0px 15px 10px", fontFamily: "Poppins", display: 'inline-flex' },
+  rating: {
+    margin: "0px 0px 15px 10px",
+    fontFamily: "Poppins",
+    display: "inline-flex",
+  },
+  addJournalist: {
+    fontFamily: "Poppins",
+    textDecoration: "none",
+    // fontSize: "15px",
+  },
 });
 
 export default function FolderList(props) {
   const classes = useStyles();
   const history = useHistory();
 
-
   function navigateToJournalist(e) {
     console.log(e.currentTarget.dataset.id);
-    history.push('journalist/' + e.currentTarget.dataset.id);
+    history.push("journalist/" + e.currentTarget.dataset.id);
   }
 
   return (
@@ -55,20 +64,26 @@ export default function FolderList(props) {
         >
           {props.value.map((result) => (
             <div onClick={navigateToJournalist} data-id={result.id}>
-              <ListItem style={{cursor: 'pointer'}}>
+              <ListItem
+                style={{
+                  cursor: "pointer",
+                  marginBottom: "5px",
+                  marginTop: "5px",
+                }}
+              >
                 <div className={classes.pictureDiv} />
-                  <CardMedia
-                    component="img"
-                    className={classes.profileImgStyles}
-                    image={result.photoURL}
-                    alt="Profile Page"
-                  />
+                <CardMedia
+                  component="img"
+                  class={classes.profileImgStyles}
+                  image={result.photoURL}
+                  alt="Profile Page"
+                />
                 <div />
                 <div>
                   <Typography
                     variant="h5"
                     component="div"
-                    className={classes.nameStyles}
+                    class={classes.nameStyles}
                   >
                     {`${result.firstName} ${result.lastName}`}
                   </Typography>
@@ -76,16 +91,25 @@ export default function FolderList(props) {
                     variant="body2"
                     component="div"
                     color="text.secondary"
-                    className={classes.rating}
+                    class={classes.rating}
                   >
-                    RATING:&nbsp;{result.overallRating ? <Rating value={result.overallRating} readOnly/> : <div>None</div>}
+                    RATING:&nbsp;
+                    {result.overallRating ? (
+                      <Rating value={result.overallRating} readOnly />
+                    ) : (
+                      <div>None</div>
+                    )}
                   </Typography>
                 </div>
               </ListItem>
               <Divider />
             </div>
           ))}
-          <Button href='/addjournalist'>Add Journalist</Button>
+          <div className={styles.addJournalistDiv}>
+            <Button href="/addjournalist" class={classes.addJournalist}>
+              Add Journalist
+            </Button>
+          </div>
         </List>
       </Card>
     </div>
