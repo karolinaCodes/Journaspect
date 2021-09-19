@@ -28,7 +28,10 @@ import Context from "../store/context";
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
   font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
-  headerColor: { color: "rgb(63, 61, 86)" },
+  headerColor: {
+    color: "rgb(63, 61, 86)",
+    display: 'inline-flex'
+  },
   typography: {
     marginLeft: "10px !important",
     fontFamily: "Poppins",
@@ -112,7 +115,6 @@ export default function Header() {
   //////////material-ui component functionality/////////////////
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const history = useHistory();
   const ctx = useContext(Context);
 
@@ -217,14 +219,16 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search className={classes.headerColor}>
-            {/* <SearchIconWrapper class={classes.headerColor}> */}
-            <SearchIcon style={{ zIndex: "100" }} onClick={handleSearch} />
-            {/* </SearchIconWrapper> */}
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              onChange={saveQuery}
-            />
+            <SearchIconWrapper>
+              <SearchIcon/>
+            </SearchIconWrapper>
+            <form onSubmit={handleSearch}>
+              <StyledInputBase
+                placeholder="Search"
+                inputProps={{ "aria-label": "search" }}
+                onChange={saveQuery}
+              />
+            </form>
           </Search>
           <SignInButton />
         </Toolbar>

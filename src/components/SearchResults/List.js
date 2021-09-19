@@ -1,19 +1,24 @@
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+import CardMedia from "@mui/material/CardMedia";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import styles from "./List.module.css";
-import { useContext } from "react";
 import Context from "../../store/context";
 
 const useStyles = makeStyles({
-  imgStyles: {
+  profileImgStyles: {
     borderRadius: "50%",
+    maxWidth: "10%",
+    maxHeight: "10%"
+  },
+  pictureDiv: {
+    display: 'flex',
+    justifyContent: 'flex-start'
   },
   nameStyles: {
     fontFamily: "Poppins",
@@ -26,9 +31,6 @@ const useStyles = makeStyles({
 
 export default function FolderList(props) {
   const classes = useStyles();
-  const ctx = useContext(Context);
-
-  console.log(props.value);
 
   return (
     //render card based on the array that get back
@@ -43,12 +45,17 @@ export default function FolderList(props) {
             padding: "10px",
           }}
         >
-          {ctx.searchResults.map((result) => (
+          {props.value.map((result) => (
             <div>
               <ListItem>
-                <ListItemAvatar>
-                  <img className={classes.imgStyles} src={result.photoURL} />
-                </ListItemAvatar>
+                <div className={classes.pictureDiv} />
+                  <CardMedia
+                    component="img"
+                    className={classes.profileImgStyles}
+                    image={result.photURL}
+                    alt="Profile Page"
+                  />
+                <div />
                 <div>
                   <Typography
                     variant="h5"
@@ -63,7 +70,7 @@ export default function FolderList(props) {
                     color="text.secondary"
                     class={classes.rating}
                   >
-                    RATING
+                    RATING:
                   </Typography>
                 </div>
               </ListItem>

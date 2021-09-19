@@ -53,7 +53,6 @@ export default function ProfileCard(props) {
           className={classes.profileImgStyles}
           image="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"
           alt="Profile Page"
-          
         />
       <div />
       <Typography variant="h4">
