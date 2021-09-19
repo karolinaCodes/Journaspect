@@ -22,6 +22,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { searchJournalists } from "../service.js";
+import { useContext } from "react";
+import Context from "../store/context";
 
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
@@ -86,20 +88,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 ///////////////////Styling/////////////////////////////
 
 export default function Header() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const history = useHistory();
-
-  const saveQuery = function (e) {
-    setSearchQuery(e.target.value);
-  };
-
-  async function getSearchResults(searchQuery) {
-    const query = new URLSearchParams(window.location.search).get("q");
-    let results = await searchJournalists(query);
-    console.log(results);
-    return results;
-  }
-
+  //////////material-ui component functionality/////////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -122,6 +111,25 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  //////////material-ui component functionality/////////////////
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const history = useHistory();
+  const ctx = useContext(Context);
+
+  const saveQuery = function (e) {
+    setSearchQuery(e.target.value);
+  };
+
+  async function getSearchResults(searchQuery) {
+    const query = new URLSearchParams(window.location.search).get("q");
+    let results = await searchJournalists(query);
+    ctx.searchResults = results;
+    console.log(ctx);
+    return results;
+  }
 
   const handleSearch = (event) => {
     event.preventDefault();
