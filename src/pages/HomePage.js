@@ -11,13 +11,10 @@ function HomePage() {
     >
       <div className={styles.mainContent}>
         <div className={styles.mainText}>
-          <h2 className={styles.descriptionTitle}>
-            Journaspect is a rating site for journalists
-          </h2>
+          <h2 className={styles.descriptionTitle}>Journaspect</h2>
 
           <h3 className={styles.description}>
-            It will help you determine the reptation of journalists and help you
-            scan for fake news.
+            A review site to hold journalists accountable
           </h3>
         </div>
         <svg
