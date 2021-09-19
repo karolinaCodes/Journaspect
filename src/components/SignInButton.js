@@ -33,7 +33,7 @@ export default function SignInButton() {
   };
 
   const handleProfile = () => {
-    //href to the user profile here
+    
     setAnchorEl(null);
   };
   
