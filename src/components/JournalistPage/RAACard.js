@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Rating from "@mui/material/Rating";
+import DefaultProfile from "../../assets/DefaultProfile.jpeg";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import {
   addJournalistReview,
@@ -255,7 +256,7 @@ export default function RAACard() {
                 <ListItemAvatar>
                   <img
                     className={classes.profileImgStyles}
-                    src={item.reviewerPhotoURL}
+                    src={DefaultProfile}
                     alt="Profile Picture"
                     width="100px"
                   />
