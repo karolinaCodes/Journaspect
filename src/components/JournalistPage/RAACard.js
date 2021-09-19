@@ -59,9 +59,9 @@ export default function RAACard() {
     setAddReview(!addReview);
   };
 
-  const handleSubmitReview = (event) => {
+  const handleSubmitReview = async (event) => {
     try {
-      addJournalistReview(
+      await addJournalistReview(
         window.location.pathname.split("/")[2],
         user,
         reviewRating
