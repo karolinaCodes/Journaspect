@@ -9,6 +9,10 @@ function HomePage() {
           "linear-gradient(63.1deg, rgba(5, 23, 111, 1) 30.4%, rgba(24, 95, 240, 1) 70.5%)",
       }}
     >
+      <br />
+      <br />
+      <br />
+      <br />
       <div className={styles.mainContent}>
         <div className={styles.mainText}>
           <h2 className={styles.descriptionTitle}>Journaspect</h2>
