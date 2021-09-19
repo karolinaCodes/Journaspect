@@ -18,12 +18,19 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import Context from "../store/context";
 import { useState } from "react";
 // import { useHistory } from "react";
 import { searchJournalists } from "../service.js";
+=======
+import { Link, useHistory } from "react-router-dom";
+import { useContext } from "react";
+import Context from "../store/context";
+import { useState } from "react";
+>>>>>>> 705f0efda9eab17ab5de10fbac772b7276160b44
 
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
@@ -228,6 +235,7 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
+<<<<<<< HEAD
             {/* <SearchIconWrapper class={classes.headerColor}> */}
             <SearchIcon style={{ zIndex: "100" }} onClick={getSearchQuery} />
             {/* </SearchIconWrapper> */}
@@ -236,6 +244,18 @@ export default function Header() {
               inputProps={{ "aria-label": "search" }}
               onChange={saveQuery}
             />
+=======
+            <SearchIconWrapper class={classes.headerColor}>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <form onSubmit={handleSearch}>
+              <StyledInputBase
+                placeholder="Search…"
+                id='header-search'
+                inputProps={{ "aria-label": "search" }}
+              />
+            </form>
+>>>>>>> 705f0efda9eab17ab5de10fbac772b7276160b44
           </Search>
           <SignInButton />
         </Toolbar>
