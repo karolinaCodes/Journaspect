@@ -21,7 +21,7 @@ function Copyright() {
     <Typography
       variant="body2"
       color="text.secondary"
-      class={classes.fontStyle}
+      className={classes.fontStyle}
     >
       <Link color="inherit" href="https://github.com/htn-2021/journaspect">
         Hack the North 2021

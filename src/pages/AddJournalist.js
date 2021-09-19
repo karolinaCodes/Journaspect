@@ -55,7 +55,7 @@ function AddJournalist(){
             <Grid container spacing={2}>
               <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <Grid item xs={6} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid black', borderRadius: '5px'}}>
-                  <img src={preview} style={{maxWidth: '100%', maxHeight: '100%'}} />
+                  <img src={preview} style={{maxWidth: '100%', maxHeight: '100%'}} alt="User Photo" />
                 </Grid>
               </div>
               <Grid item xs={12}>

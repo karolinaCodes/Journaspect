@@ -24,7 +24,7 @@ function App() {
         <Route path="/myprofile" exact>
           <MyProfile />
         </Route>
-        <Route path="/journalistpage">
+        <Route path="/journalist">
           {/*need to make dynamic*/}
           <JournalistPage />
         </Route>
@@ -42,7 +42,7 @@ function App() {
           <SearchResults />
         </Route>
         <Route path="*">
-          <img src={PageNotFoundImg} width="100%" margin="0" height="100%" />
+          <img src={PageNotFoundImg} width="100%" margin="0" height="100%" alt="404 error"/>
         </Route>
       </Switch>
       <Footer />

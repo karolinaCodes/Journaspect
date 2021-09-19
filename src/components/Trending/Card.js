@@ -24,7 +24,7 @@ export default function MediaCard() {
           gutterBottom
           variant="h4"
           component="div"
-          class={classes.typography}
+          className={classes.typography}
         >
           David Akin
         </Typography>
