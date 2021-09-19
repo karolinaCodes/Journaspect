@@ -22,7 +22,7 @@ export async function searchJournalists(queryString) {
   if(!queryString) {
     return [];
   }
-  const tokens = queryString.trim().split(' ');
+  const tokens = queryString.trim().toLowerCase().split(' ');
   const col = query(collection(db, 'journalists'), where('tags', 'array-contains-any', tokens));
   const snap = await getDocs(col);
   const journalists = [];
