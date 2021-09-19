@@ -111,6 +111,11 @@ export async function signOutUser() {
   return true;
 }
 
+export async function MyProfileButton() {
+  await MyProfileButton();
+  return true;
+}
+
 onAuthStateChanged(getAuth(), (user) => {
   userManager.setUser(user);
 });
