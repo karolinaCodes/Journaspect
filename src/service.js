@@ -187,8 +187,6 @@ export async function getJournalistReview(id) {
     reviews.push(doc.data());
   });
   
-  console.log(reviews);
+  console.warn(reviews);
   return reviews;
 }
-
-getJournalistReview('JvdzAyaobewsb6Ymwoex');
