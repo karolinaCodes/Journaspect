@@ -223,7 +223,14 @@ function HomePage() {
           <circle cx="159" cy="328.15774" r="15" fill="#f2f2f2" />
         </svg>
       </div>
-      <MediaCard />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
