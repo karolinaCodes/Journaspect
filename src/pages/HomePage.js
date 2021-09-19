@@ -3,7 +3,7 @@ import MediaCard from "../components/Trending/Trending";
 
 function HomePage() {
   return (
-    <div>
+    <div style={{backgroundImage: 'linear-gradient(63.1deg, rgba(5, 23, 111, 1) 30.4%, rgba(24, 95, 240, 1) 70.5%)'}}>
       <div className={styles.mainContent}>
         <div className={styles.mainText}>
           <h1>What is Journaspect?</h1>
@@ -221,6 +221,9 @@ function HomePage() {
         </svg>
       </div>
       <MediaCard />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

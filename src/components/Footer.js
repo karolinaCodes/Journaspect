@@ -25,7 +25,7 @@ function Copyright() {
     >
       <Link color="inherit" href="https://github.com/htn-2021/journaspect">
         Hack the North 2021
-      </Link>{" "}
+      </Link>
     </Typography>
   );
 }
@@ -39,6 +39,11 @@ export default function StickyFooter() {
         py: 3,
         px: 10,
         mt: "auto",
+        display: 'inline-block',
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        right: 0,
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
             ? theme.palette.grey[200]

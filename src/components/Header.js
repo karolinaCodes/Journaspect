@@ -128,6 +128,7 @@ export default function Header() {
       return;
     }
     history.push("/searchresults?q=" + searchQuery);
+    history.go(0);
   };
 
   const menuId = "primary-search-account-menu";

@@ -13,10 +13,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signInUser } from '../service';
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
 function SignIn(){
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,6 +26,7 @@ function SignIn(){
     // eslint-disable-next-line no-console
     try {
       signInUser(data.get('email'), data.get('password'));
+      history.push("/");
     } catch(e) {
       console.log("Error signing in");
     }

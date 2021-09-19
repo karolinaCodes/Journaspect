@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { makeStyles } from "@mui/styles";
-import { userManager } from "../service.js";
-import { Link } from "react-router-dom";
+import { userManager, signOutUser } from "../service.js";
+import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   buttonStyle: {
@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 
 export default function SignInButton() {
   const classes = useStyles();
+  const history = useHistory();
   const [username, setUsername] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -33,6 +34,18 @@ export default function SignInButton() {
 
   const handleProfile = () => {
     //href to the user profile here
+    setAnchorEl(null);
+  };
+  
+  const handleLogout = () => {
+    try {
+      signOutUser();
+    } catch (e) {
+      console.log('Error signing out');
+    }
+    finally {
+      history.go(0);
+    }
     setAnchorEl(null);
   };
 
@@ -74,7 +87,7 @@ export default function SignInButton() {
         }}
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </Stack>
   );

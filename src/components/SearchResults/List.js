@@ -2,15 +2,14 @@ import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import CardMedia from "@mui/material/CardMedia";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import styles from "./List.module.css";
-import Context from "../../store/context";
+import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
-import Rating from "../Rating";
+import Rating from "@mui/material/Rating";
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -56,7 +55,7 @@ export default function FolderList(props) {
         >
           {props.value.map((result) => (
             <div onClick={navigateToJournalist} data-id={result.id}>
-              <ListItem>
+              <ListItem style={{cursor: 'pointer'}}>
                 <div className={classes.pictureDiv} />
                   <CardMedia
                     component="img"
@@ -79,13 +78,14 @@ export default function FolderList(props) {
                     color="text.secondary"
                     className={classes.rating}
                   >
-                    RATING:&nbsp;{result.overallRating ? <Rating value={result.overallRating}/> : <div>None</div>}
+                    RATING:&nbsp;{result.overallRating ? <Rating value={result.overallRating} readOnly/> : <div>None</div>}
                   </Typography>
                 </div>
               </ListItem>
               <Divider />
             </div>
           ))}
+          <Button href='/addjournalist'>Add Journalist</Button>
         </List>
       </Card>
     </div>

@@ -9,9 +9,9 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
+import Rating from "@mui/material/Rating";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
-import { addJournalistReview, userManager } from '../../service.js'
+import { addJournalistReview, userManager } from '../../service.js';
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -25,6 +25,9 @@ export default function RAACard() {
   const [tabValue, setTabValue] = React.useState('one');
   const [addReview, setAddReview] = React.useState(false);
   const [reviews, setReviews] = React.useState([{first: 'Elon', last: 'Musk', profilePicture: 'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg', review: 'This was very well done but bla bla bla'}, {first: 'Jeff', last: 'Bezos', profilePicture: 'https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5bb22ae84bbe6f67d2e82e05%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D627%26cropX2%3D1639%26cropY1%3D129%26cropY2%3D1142', review: 'This was poorly done bla bla bla'}]);
+  const [reviewRating, setReviewRating] = React.useState({overallRating: 0, ethicsRating: 0, writingRating: 0, accuracyRating: 0, politicalRating: 0, writtenReview: ''});
+
+  const user = userManager.getCurrentUser();
   
   const handleChange = (event, newValue) => {
     event.preventDefault();
@@ -36,9 +39,9 @@ export default function RAACard() {
   };
   
   const handleSubmitReview = (event) => {
-    const data = new FormData(event.currentTarget);
-    //addJournalistReview(data.get);
-    console.log('Submit review');
+    addJournalistReview(window.location.pathname.split('/')[2], user, reviewRating);
+    toggleAddReview();
+    event.preventDefault();
   };
 
   return (
@@ -64,12 +67,44 @@ export default function RAACard() {
               <div style={{width: '500px'}}>
                 <DialogTitle>Add Review</DialogTitle>
                 <DialogContent>
+                  {user.name}:
                   <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <FormControl onSubmit={handleSubmitReview}>
-                      <TextField
-                        multiline
-                      />
-                    </FormControl>
+                    <TextField
+                      name="review"
+                      required
+                      multiline
+                      value={reviewRating.writtenReview}
+                      onChange={(event) => {
+                        setReviewRating({...reviewRating, writtenReview: event.target.value});
+                      }}
+                    />
+                    <div style={{margin: '10px', display: 'inline-flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                      <div style={{display: 'inline-flex', justifyContent: 'space-between'}}>
+                        Overall Rating: <Rating value={reviewRating.overallRating} onChange={(event, newValue) => {
+                          setReviewRating({...reviewRating, overallRating: newValue});
+                        }} />
+                      </div>
+                      <div style={{display: 'inline-flex', justifyContent: 'space-between'}}>
+                        Ethics Rating (Optional): <Rating value={reviewRating.ethicsRating} onChange={(event, newValue) => {
+                          setReviewRating({...reviewRating, ethicsRating: newValue});
+                        }} />
+                      </div>
+                      <div style={{display: 'inline-flex', justifyContent: 'space-between'}}>
+                        Writing Rating (Optional): <Rating value={reviewRating.writingRating} onChange={(event, newValue) => {
+                          setReviewRating({...reviewRating, writingRating: newValue});
+                        }} />
+                      </div>
+                      <div style={{display: 'inline-flex', justifyContent: 'space-between'}}>
+                        Accuracy Rating (Optional): <Rating value={reviewRating.accuracyRating} onChange={(event, newValue) => {
+                          setReviewRating({...reviewRating, accuracyRating: newValue});
+                        }} />
+                      </div>
+                      <div style={{display: 'inline-flex', justifyContent: 'space-between'}}>
+                        Political Standing (Optional): <Rating value={reviewRating.politicalRating} onChange={(event, newValue) => {
+                          setReviewRating({...reviewRating, politicalRating: newValue});
+                        }} />
+                      </div>
+                    </div>
                     <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                       <Button onClick={handleSubmitReview} type='submit'>
                         Submit

@@ -11,19 +11,25 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signUpUser } from '../service.js';
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
 
 function SignUp(){
   const [passwordError, SetPasswordError] = React.useState('');
+  const history = useHistory();
   const handleSubmit = (event) => {
 
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log(data.get("email"));
-    signUpUserWithEmailAndPassword(data.get('email'), data.get('password'), data.get('Display_Name'));
-    
+    try{
+      signUpUserWithEmailAndPassword(data.get('email'), data.get('password'), data.get('Display_Name'));
+      history.push("/");
+    } catch (e) {
+      console.log("Error creating user")
+    }
   };
 
   return (

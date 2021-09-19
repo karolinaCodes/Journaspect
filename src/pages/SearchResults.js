@@ -21,9 +21,9 @@ class SearchResults extends React.Component {
 
   render() {
     return (
-      <div className={styles.listStyles}>
-        <List value={this.state.results} />
-      </div>
+        <div className={styles.listStyles}>
+          <List value={this.state.results} />
+        </div>
     );
   }
 }

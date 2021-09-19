@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import CardMedia from "@mui/material/CardMedia";
-import Rating from "../Rating";
+import Rating from "@mui/material/Rating";
 
 const useStyles = makeStyles({
   profileImgStyles: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
   ratingsDiv: {
     height: '30%',
-    width: '70%',
+    width: '90%',
     backgroundColor: '#d8e5f2',
     display: 'flex',
     flexDirection: 'column',
@@ -53,39 +53,39 @@ export default function ProfileCard(props) {
           alt="Profile Page"
         />
       <div />
-      <Typography variant="h4">
+      <Typography variant="h4" style={{marginTop: '10px'}}>
         {journalist.firstName} {journalist.lastName} 
       </Typography>
       <div className={classes.singleRatingsDiv}>
         <Typography>
           Overall Rating:
         </Typography>
-        {journalist.overallRating ? <Rating value={journalist.overallRating}/> : <div />}
+        {journalist.overallRating ? <Rating value={journalist.overallRating} readOnly /> : <div />}
       </div>
       <div className={classes.ratingsDiv}>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Ethics
           </Typography>
-          {journalist.ethicsRating ? <Rating value={journalist.ethicsRating}/> : <div />}
+          {journalist.ethicsRating ? <Rating value={journalist.ethicsRating} readOnly /> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Writing
           </Typography>
-          {journalist.writingRating ? <Rating value={journalist.writingRating}/> : <div />}
+          {journalist.writingRating ? <Rating value={journalist.writingRating} readOnly /> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Accuracy
           </Typography>
-          {journalist.accuracyRating ? <Rating value={journalist.accuracyRating}/> : <div />}
+          {journalist.accuracyRating ? <Rating value={journalist.accuracyRating} readOnly /> : <div />}
         </div>
         <div className={classes.singleRatingsDiv}>
           <Typography className={classes.singleRatingsDiv}>
             Political Standing
           </Typography>
-          {journalist.politicalRating ? <Rating value={journalist.politicalRating}/> : <div />}
+          {journalist.politicalRating ? <Rating value={journalist.politicalRating} readOnly /> : <div />}
         </div>
       </div>
     </Card>
