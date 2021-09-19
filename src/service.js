@@ -180,10 +180,7 @@ export async function addJournalistReview(journalistId, user, review) {
 }
 
 export async function getJournalistReview(id) {
-  const docSnaps = await getDocs(collection(db, 'journalists/' + id + '/review'));
-
-  const col = query(collection(db, 'journalists/' + id + '/review'));
-  const docSnaps = await getDocs(col);
+  const docSnaps = await getDocs(collection(db, 'journalists/' + id + '/reviews'));
   const reviews = [];
   for(const snap of docSnaps) {
     reviews.push(snap.data());
