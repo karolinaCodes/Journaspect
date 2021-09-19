@@ -8,6 +8,8 @@ import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import styles from "./List.module.css";
+import { useContext } from "react";
+import Context from "../../store/context";
 
 const useStyles = makeStyles({
   imgStyles: {
@@ -22,67 +24,54 @@ const useStyles = makeStyles({
   rating: { margin: "0px 0px 15px 10px", fontFamily: "Poppins" },
 });
 
-export default function FolderList() {
+export default function FolderList(props) {
   const classes = useStyles();
+  const ctx = useContext(Context);
+
+  console.log(props.value);
+
   return (
     //render card based on the array that get back
-    <Card>
-      <h1 className={styles.headerStyles}>Search Results</h1>
-      <List
-        sx={{
-          width: "100%",
-          maxWidth: "100%",
-          bgcolor: "background.paper",
-          padding: "10px",
-        }}
-      >
-        <ListItem>
-          <ListItemAvatar>
-            <img
-              className={classes.imgStyles}
-              src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"
-              width="100px"
-            />
-          </ListItemAvatar>
-          <div>
-            <Typography variant="h5" component="div" className={classes.nameStyles}>
-              Elon Musk
-            </Typography>
-            <Typography
-              variant="body2"
-              component="div"
-              color="text.secondary"
-              className={classes.rating}
-            >
-              RATING
-            </Typography>
-          </div>
-        </ListItem>
-
-        <Divider />
-        <ListItem>
-          <ListItemAvatar>
-            <img
-              className={classes.imgStyles}
-              src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"
-              width="100px"
-            />
-          </ListItemAvatar>
-          <div>
-            <Typography variant="h5" component="div" className={classes.nameStyles}>
-              Elon Musk
-            </Typography>
-            <Typography
-              variant="body2"
-              component="div"
-              color="text.secondary"
-              className={classes.rating}
-            >
-              RATING
-            </Typography>
-          </div>
-        </ListItem>
-      </List>
-    </Card>
+    <div>
+      <Card>
+        <h1 className={styles.headerStyles}>Search Results</h1>
+        <List
+          sx={{
+            width: "100%",
+            maxWidth: "100%",
+            bgcolor: "background.paper",
+            padding: "10px",
+          }}
+        >
+          {ctx.searchResults.map((result) => (
+            <div>
+              <ListItem>
+                <ListItemAvatar>
+                  <img className={classes.imgStyles} src={result.photoURL} />
+                </ListItemAvatar>
+                <div>
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    class={classes.nameStyles}
+                  >
+                    {`${result.firstName} ${result.lastName}`}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    component="div"
+                    color="text.secondary"
+                    class={classes.rating}
+                  >
+                    RATING
+                  </Typography>
+                </div>
+              </ListItem>
+              <Divider />
+            </div>
+          ))}
+        </List>
+      </Card>
+    </div>
   );
 }
