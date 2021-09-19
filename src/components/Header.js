@@ -19,7 +19,11 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { searchJournalists } from "../service.js";
 
+///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
   font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
   headerColor: { color: "rgb(63, 61, 86)" },
@@ -76,8 +80,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+///////////////////Styling/////////////////////////////
 
 export default function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const history = useHistory();
+
+  const saveQuery = function (e) {
+    setSearchQuery(e.target.value);
+  };
+
+  async function getSearchResults(searchQuery) {
+    const query = new URLSearchParams(window.location.search).get("q");
+    let results = await searchJournalists(query);
+    console.log(results);
+    return results;
+  }
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -99,6 +118,15 @@ export default function Header() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (!searchQuery) {
+      return;
+    }
+    history.push("/searchresults?q=" + searchQuery);
+    getSearchResults();
   };
 
   const menuId = "primary-search-account-menu";
@@ -190,12 +218,13 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search className={classes.headerColor}>
-            <SearchIconWrapper className={classes.headerColor}>
-              <SearchIcon />
-            </SearchIconWrapper>
+            {/* <SearchIconWrapper class={classes.headerColor}> */}
+            <SearchIcon style={{ zIndex: "100" }} onClick={handleSearch} />
+            {/* </SearchIconWrapper> */}
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={saveQuery}
             />
           </Search>
           <SignInButton />

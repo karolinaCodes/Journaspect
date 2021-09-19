@@ -25,6 +25,7 @@ const useStyles = makeStyles({
 export default function FolderList() {
   const classes = useStyles();
   return (
+    //render card based on the array that get back
     <Card>
       <h1 className={styles.headerStyles}>Search Results</h1>
       <List

@@ -1,10 +1,12 @@
-import { searchJournalists } from "../service.js";
 import styles from "./SearchResults.module.css";
-
+import { useParams } from "react-router-dom";
 import List from "../components/SearchResults/List";
+import Context from "../store/context";
+import { useContext } from "react";
 
-function SearchReults() {
+function SearchResults() {
   // TODO diplay jounalist stuff
+
   return (
     <div className={styles.listStyles}>
       <List />
@@ -12,11 +14,4 @@ function SearchReults() {
   );
 }
 
-async function getSearchResults() {
-  const query = (new URLSearchParams(window.location.search)).get('q');
-  let results = await searchJournalists(query);
-  console.log(results);
-  return results;
-}
-
-export default SearchReults;
+export default SearchResults;
