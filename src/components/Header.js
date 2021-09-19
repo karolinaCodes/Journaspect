@@ -27,10 +27,14 @@ import Context from "../store/context";
 
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
-  font: { fontFamily: "Poppins", color: "rgb(63, 61, 86)", fontWeight: 600 },
+  font: {
+    fontFamily: "Poppins !important",
+    color: "rgb(63, 61, 86)",
+    fontWeight: 600,
+  },
   headerColor: {
     color: "rgb(63, 61, 86)",
-    display: 'inline-flex'
+    display: "inline-flex",
   },
   typography: {
     marginLeft: "10px !important",
@@ -213,7 +217,7 @@ export default function Header() {
         <Toolbar>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Button color="inherit" style={{ backgroundColor: "transparent" }}>
-              <Typography noWrap className={classes.typography}>
+              <Typography noWrap class={classes.typography}>
                 Journaspect
               </Typography>
             </Button>
@@ -221,7 +225,7 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
           <Search className={classes.headerColor}>
             <SearchIconWrapper>
-              <SearchIcon/>
+              <SearchIcon />
             </SearchIconWrapper>
             <form onSubmit={handleSearch}>
               <StyledInputBase

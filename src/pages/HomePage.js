@@ -3,19 +3,22 @@ import MediaCard from "../components/Trending/Trending";
 
 function HomePage() {
   return (
-    <div style={{backgroundImage: 'linear-gradient(63.1deg, rgba(5, 23, 111, 1) 30.4%, rgba(24, 95, 240, 1) 70.5%)'}}>
+    <div
+      style={{
+        backgroundImage:
+          "linear-gradient(63.1deg, rgba(5, 23, 111, 1) 30.4%, rgba(24, 95, 240, 1) 70.5%)",
+      }}
+    >
       <div className={styles.mainContent}>
         <div className={styles.mainText}>
-          <h1>What is Journaspect?</h1>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
-          </p>
+          <h2 className={styles.descriptionTitle}>
+            Journaspect is a rating site for journalists
+          </h2>
+
+          <h3 className={styles.description}>
+            It will help you determine the reptation of journalists and help you
+            scan for fake news.
+          </h3>
         </div>
         <svg
           className={styles.newpaperImg}
