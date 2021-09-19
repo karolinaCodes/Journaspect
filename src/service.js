@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, getDoc, updateDoc, increment } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -129,3 +129,33 @@ export const userManager = {
     this.subscribers.push(callback);
   }
 };
+
+export async function addReview(journalistId, user, review) {
+  // TODO atomic
+  const ratings = {};
+  if(review.overallRating) {
+    ratings.overallNum = increment(1);
+    ratings.overallRating = review.ethicsRating;
+  }
+  if(review.ethicsRating) {
+    ratings.ethicsNum = increment(1);
+    ratings.ethicsTotal = review.ethicsRating;
+  }
+  if(review.writingRating) {
+    ratings.writingNum = increment(1);
+    ratings.writingTotal = review.ethicsRating;
+  }
+  if(review.accuracyRating) {
+    ratings.accuracyNum = increment(1);
+    ratings.accuracyTotal = review.ethicsRating;
+  }
+  await updateDoc(doc(db, 'journalists', journalistId), ratings);
+  const docRef = await addDoc(collection(db, 'journalists/' + journalistId + '/reviews'), {
+    reviewer: user.name,
+    reviewerPhotoURL: user.photURL,
+    review: review.writtenReview,
+  });
+
+  console.log(docRef);
+  return docRef.data();
+}
