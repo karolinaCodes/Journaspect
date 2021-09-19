@@ -146,8 +146,6 @@ export const userManager = {
 
 export async function addJournalistReview(journalistId, user, review) {
   // TODO atomic
-  // Need to fix this to get the total rating and divide it by the overall number
-  // e.g. ethicsRating = totalEthicsRating / ethicsNum 
   const ratings = {};
   if(review.overallRating) {
     ratings.overallNum = increment(1);
