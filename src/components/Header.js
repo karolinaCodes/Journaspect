@@ -21,7 +21,7 @@ import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { searchJournalists } from "../service.js";
+
 import { useContext } from "react";
 import Context from "../store/context";
 
@@ -120,21 +120,12 @@ export default function Header() {
     setSearchQuery(e.target.value);
   };
 
-  async function getSearchResults(searchQuery) {
-    const query = new URLSearchParams(window.location.search).get("q");
-    let results = await searchJournalists(query);
-    ctx.searchResults = results;
-    console.log(ctx);
-    return results;
-  }
-
   const handleSearch = (event) => {
     event.preventDefault();
     if (!searchQuery) {
       return;
     }
     history.push("/searchresults?q=" + searchQuery);
-    getSearchResults();
   };
 
   const menuId = "primary-search-account-menu";
@@ -215,7 +206,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color='default'>
+      <AppBar position="static" color="default">
         <Toolbar>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Button color="inherit" style={{ backgroundColor: "transparent" }}>
