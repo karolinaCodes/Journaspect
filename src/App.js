@@ -12,7 +12,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PageNotFoundImg from "./assets/undraw_page_not_found_su7k.jpg";
 import { Switch } from "react-router-dom";
-import ProfilePage1 from "./pages/ProfilePage1";
 
 function App() {
   return (
@@ -25,7 +24,7 @@ function App() {
         <Route path="/myprofile" exact>
           <MyProfile />
         </Route>
-        <Route path="/:journalist">
+        <Route path="/journalistpage">
           {/*need to make dynamic*/}
           <JournalistPage />
         </Route>
@@ -41,9 +40,6 @@ function App() {
         <Route path="/searchresults" exact>
           {/*need to make dynamic*/}
           <SearchResults />
-        </Route>
-        <Route path="/ProfilePage1" exact>
-          <ProfilePage1 />
         </Route>
         <Route path="*">
           <img src={PageNotFoundImg} width="100%" margin="0" height="100%" />

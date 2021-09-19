@@ -18,14 +18,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SignInButton from "./SignInButton";
 import { makeStyles } from "@mui/styles";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import Context from "../store/context";
 import { useState } from "react";
-=======
-import { Link, useHistory } from "react-router-dom";
->>>>>>> fd59db3dc423b54bb4c77f4444220aa974570642
+// import { useHistory } from "react";
+import { searchJournalists } from "../service.js";
 
 ///////////////////Styling/////////////////////////////
 const useStyles = makeStyles({
@@ -92,14 +90,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const ctx = useContext(Context);
+  // const history = useHistory();
 
   const saveQuery = function (e) {
     setSearchQuery(e.target.value);
   };
 
+  async function getSearchResults(searchQuery) {
+    const query = new URLSearchParams(window.location.search).get("q");
+    let results = await searchJournalists(query);
+    console.log(results);
+    return results;
+  }
+
   const getSearchQuery = function (e) {
-    ctx.searchQuery = searchQuery;
-    console.log(ctx);
+    getSearchResults(searchQuery);
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -107,8 +112,6 @@ export default function Header() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const history = useHistory();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -127,16 +130,14 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-
   const handleSearch = (event) => {
     event.preventDefault();
-    const query = document.getElementById('header-search').value;
-    if(!query) {
+    const query = document.getElementById("header-search").value;
+    if (!query) {
       return;
     }
-    history.push('/searchresults?q=' + query);
+    // history.push("/searchresults?q=" + query);
   };
-
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -227,7 +228,6 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Search class={(classes.headerColor, classes.searchBar)}>
-<<<<<<< HEAD
             {/* <SearchIconWrapper class={classes.headerColor}> */}
             <SearchIcon style={{ zIndex: "100" }} onClick={getSearchQuery} />
             {/* </SearchIconWrapper> */}
@@ -236,18 +236,6 @@ export default function Header() {
               inputProps={{ "aria-label": "search" }}
               onChange={saveQuery}
             />
-=======
-            <SearchIconWrapper class={classes.headerColor}>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <form onSubmit={handleSearch}>
-              <StyledInputBase
-                placeholder="Search…"
-                id='header-search'
-                inputProps={{ "aria-label": "search" }}
-              />
-            </form>
->>>>>>> fd59db3dc423b54bb4c77f4444220aa974570642
           </Search>
           <SignInButton />
         </Toolbar>
