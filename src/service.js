@@ -146,28 +146,26 @@ export const userManager = {
 
 export async function addJournalistReview(journalistId, user, review) {
   // TODO atomic
-  // Need to fix this to get the total rating and divide it by the overall number
-  // e.g. ethicsRating = totalEthicsRating / ethicsNum 
   const ratings = {};
   if(review.overallRating) {
     ratings.overallNum = increment(1);
-    ratings.overallRating = review.overallRating;
+    ratings.overallRating = increment(review.overallRating);
   }
   if(review.ethicsRating) {
     ratings.ethicsNum = increment(1);
-    ratings.ethicsRating = review.ethicsRating;
+    ratings.ethicsRating = increment(review.ethicsRating);
   }
   if(review.writingRating) {
     ratings.writingNum = increment(1);
-    ratings.writingRating = review.writingRating;
+    ratings.writingRating = increment(review.writingRating);
   }
   if(review.accuracyRating) {
     ratings.accuracyNum = increment(1);
-    ratings.accuracyRating = review.accuracyRating;
+    ratings.accuracyRating = increment(review.accuracyRating);
   }
   if(review.politicalRating) {
     ratings.politicalTotal = increment(1);
-    ratings.politicalRating = review.politicalRating;
+    ratings.politicalRating = increment(review.politicalRating);
   }
   await updateDoc(doc(db, 'journalists', journalistId), ratings);
   //Uncaught (in promise) FirebaseError: Function addDoc() called with invalid data. Unsupported field value: undefined (found in field reviewerPhotoURL in document journalists/2FKmSKPDcuP68yr83paV/reviews/o641S54tuTZjAmw8XkD9)
