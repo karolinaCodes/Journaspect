@@ -1,6 +1,9 @@
 # Getting Started with Create React App
 
+## DEMO
+
 View our project submission and demo on DevPost here: https://devpost.com/software/journaspect
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
