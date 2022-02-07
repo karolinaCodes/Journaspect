@@ -2,10 +2,9 @@
 
 ## DEMO
 
+![image](https://user-images.githubusercontent.com/82968631/152710309-7029138a-b5a6-4166-89da-df0c25718bb6.png)
+
 View our project submission and demo on DevPost here: https://devpost.com/software/journaspect
-
-![image](https://user-images.githubusercontent.com/82968631/152710208-888191f5-85fa-4dac-b372-b3e07eafe632.png)
-
 
 ### Inspiration
 Our inspiration stemmed from our observation of how the journalism industry has become more sensationalist, partisan and is spreading more propaganda- or “fake news”. The journalism industry seems to have little regard for society and has little to no accountability. Journaspect attempts to help hold journalists accountable for the information they broadcast.
